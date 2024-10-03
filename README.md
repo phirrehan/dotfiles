@@ -27,7 +27,7 @@ $ sudo pacman -S stow
 First, clone the dotfiles repo to $HOME directory and change directory:
 
 ```
-$ git clone https://github.com/phirrehan/dotfiles.git
+$ git clone --recurse-submodules https://github.com/phirrehan/dotfiles.git
 $ cd dotfiles
 ```
 then use GNU stow to create symbolic links
