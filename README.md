@@ -8,7 +8,7 @@ Ensure you have the following installed on your system
 
 ### Git
 
-Install git using the distribution's package manager. For installing on arch based system, use:
+Install git using the distribution's package manager. For installing on Arch based system, use:
 
 ```
 $ sudo pacman -S git
@@ -16,7 +16,7 @@ $ sudo pacman -S git
 
 ### Stow
 
-Similarly to git, install stow using the distribution's package manager. For arch bases system use:
+Similarly to git, install stow using the distribution's package manager. For Arch based system use:
 
 ```
 $ sudo pacman -S stow
