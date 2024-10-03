@@ -1,0 +1,9 @@
+# Compiling program in C
+cn() {
+  clang --debug ~/c/prog/$1.c -o ~/c/bin/$1 && ~/c/bin/$1
+}
+
+# Compiling program in C++
+cppn() {
+  clang++ --debug ~/c/prog/$1.c -o ~/c/bin/$1 && ~/c/bin/$1
+}
