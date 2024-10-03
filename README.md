@@ -8,28 +8,30 @@ Ensure you have the following installed on your system
 
 ### Git
 
-Install git using the distribution's package manager. For installing on Arch based system, use:
+Install git using the distribution's package manager. For installing on arch based system, use:
 
+```
 $ sudo pacman -S git
+```
 
 ### Stow
 
-Similarly to git, install stow using the distribution's package manager. For Arch based system, use:
+Similarly to git, install stow using the distribution's package manager. For arch bases system use:
 
+```
 $ sudo pacman -S stow
+```
 
 ## Installation
 
-First, clone the dotfiles repo to $HOME directory:
+First, clone the dotfiles repo to $HOME directory and change directory:
 
+```
 $ git clone https://github.com/phirrehan/dotfiles.git
-
-cd into the cloned directory:
-
 $ cd dotfiles
+```
+then use GNU stow to create symbolic links
 
-Rename your dotfiles or move them into a backup directory.
-Now use GNU stow to create symbolic links to the files in your system.
-
-$ stow $HOME/dotfiles/
-
+```
+$ stow .
+```
