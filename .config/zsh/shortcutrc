@@ -1,11 +1,11 @@
 # Compiling program in C
 cn() {
-  clang --debug ~/c/prog/$1.c -o ~/c/bin/$1 && ~/c/bin/$1
+  clang --debug ~/cprograms/prog/$1.c -o ~/cprograms/bin/$1 && ~/cprograms/bin/$1
 }
 
 # Compiling program in C++
 cppn() {
-  clang++ --debug ~/c/prog/$1.cpp -o ~/c/bin/$1 && ~/c/bin/$1
+  clang++ --debug ~/cprograms/prog/$1.cpp -o ~/cprograms/bin/$1 && ~/cprograms/bin/$1
 }
 
 # Pacman search and install
