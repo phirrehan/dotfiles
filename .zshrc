@@ -18,6 +18,7 @@ setopt hist_find_no_dups
 # Load aliases and shortcuts if existent.
 [ -f "$HOME/.config/zsh/shortcutrc" ] && source "$HOME/.config/zsh/shortcutrc"
 [ -f "$HOME/.config/zsh/aliasrc" ] && source "$HOME/.config/zsh/aliasrc"
+[ -f "$HOME/.config/zsh/privaterc" ] && source "$HOME/.config/zsh/privaterc"
 
 # Set the directory to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
