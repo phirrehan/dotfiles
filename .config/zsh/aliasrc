@@ -1,5 +1,5 @@
-alias ls="ls --color=auto"
-alias grep="grep --color=auto"
+alias ls="ls --color"
+alias grep="grep --color"
 alias vim="nvim"
 alias cfa="nvim ~/.config/zsh/aliasrc"
 alias cfs="nvim ~/.config/zsh/shortcutrc"
