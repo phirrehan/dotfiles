@@ -20,23 +20,24 @@ setopt hist_find_no_dups
 [ -f "$HOME/.config/zsh/aliasrc" ] && source "$HOME/.config/zsh/aliasrc"
 [ -f "$HOME/.config/zsh/privaterc" ] && source "$HOME/.config/zsh/privaterc"
 
-# Set the directory to store zinit and plugins
+# Zinint
+
+# Set the directory to store Zinit and Plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
-# Download zinit, if it's not there yet
+# Download Zinit, if it's not there yet
 if [ ! -d "$ZINIT_HOME" ]; then 
   mkdir -p "$(dirname $ZINIT_HOME)"
   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
-# Source/Load zinit
+# Source Zinit
 source "${ZINIT_HOME}/zinit.zsh"
 
-# Add in zsh plugins
+# Add in Zsh Plugins
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
-zinit light Aloxaf/fzf-tab
 
 # Add Snippets
 zinit snippet OMZP::git
@@ -44,14 +45,12 @@ zinit snippet OMZP::git
 # Load Completions
 autoload -U compinit && compinit
  
-# Replay all cached completions in quiet mode
+## Replay all cached completions in quiet mode
 zinit cdreplay -q
 
 # Completion Styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-zstyle ':completion:*' menu no
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 
 # KeyBindings
 bindkey -e
