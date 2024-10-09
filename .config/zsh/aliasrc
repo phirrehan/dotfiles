@@ -1,9 +1,18 @@
-alias ls="ls --color"
+# System Aliases
+alias ls="ls -a --color"
 alias grep="grep --color"
 alias vim="nvim"
+
+# Navigation Aliases
 alias cfa="nvim ~/.config/zsh/aliasrc"
 alias cfs="nvim ~/.config/zsh/shortcutrc"
 alias cfp="nvim ~/.config/zsh/privaterc"
 alias sz="source ~/.zshrc"
-alias c="clang --debug ~/cprograms/prog/practice.c -o ~/cprograms/bin/practice && ~/cprograms/bin/practice"
-alias cpp="clang++ --debug ~/cprograms/prog/practice.cpp -o ~/cprograms/bin/practice++ && ~/cprograms/bin/practice++"
+
+# C/C++ Compiler Aliases
+alias c="clang --debug ~/files/cprograms/prog/practice.c -o ~/files/cprograms/bin/practice && ~/files/cprograms/bin/practice"
+alias cpp="clang++ --debug ~/files/cprograms/prog/practice.cpp -o ~/files/cprograms/bin/practice++ && ~/files/cprograms/bin/practice++"
+
+# GPG encryption/decryption Aliases
+alias enc="gpg -r phirrehan@gmail.com -e"
+alias dec="gpg -d"

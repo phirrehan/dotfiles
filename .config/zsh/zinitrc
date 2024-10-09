@@ -21,7 +21,7 @@ zinit light zsh-users/zsh-autosuggestions
 zinit snippet OMZP::git
 
 # Load Completions
-autoload -U compinit && compinit
+autoload -U compinit && compinit -d ~/.config/zsh/.zcompdump
  
 ## Replay all cached completions in quiet mode
 zinit cdreplay -q

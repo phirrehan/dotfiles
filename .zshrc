@@ -7,11 +7,15 @@ HISTSIZE=10000
 SAVEEHIST=$HISTSIZE
 HISTFILE=~/.cache/zsh/history
 
-# Load aliases and shortcuts if existent.
+# Source/Load Files 
 [ -f "$HOME/.config/zsh/shortcutrc" ] && source "$HOME/.config/zsh/shortcutrc"
 [ -f "$HOME/.config/zsh/aliasrc" ] && source "$HOME/.config/zsh/aliasrc"
 [ -f "$HOME/.config/zsh/privaterc" ] && source "$HOME/.config/zsh/privaterc"
 [ -f "$HOME/.config/zsh/zinitrc" ] && source "$HOME/.config/zsh/zinitrc"
+
+# Exports
+export CLANG_FORMAT_STYLE=~/.config/clang/.clang-format
+export GIT_CONFIG=~/.gitconfig
 
 # KeyBindings
 bindkey -e
