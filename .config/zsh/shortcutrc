@@ -10,7 +10,7 @@ cppn() {
 
 # Pacman search and install
 pacf() {
-  pacman -Slq | fzf --multi --preview 'pacman -Si{1}' | xargs -ro sudo pacman -S
+  pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S
 }
 
 # Pacamn Search and Remove
@@ -20,6 +20,6 @@ pacrm() {
 
 # Paru search and install
 paruf() {
-  paru -Slq | fzf --multi --preview 'paru -Si{1}' | xargs -ro paru -S
+  paru -Slq | fzf --multi --preview 'paru -Si {1}' | xargs -ro paru -S
 }
 
