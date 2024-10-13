@@ -6,7 +6,7 @@ alias vim="nvim"
 # Zsh Configuration Aliases
 alias cfa="nvim ~/.config/zsh/aliasrc"
 alias cfs="nvim ~/.config/zsh/shortcutrc"
-alias cfp="nvim ~/.config/zsh/privaterc"
+alias cfp="nvim ~/files/privateFiles/.zsh/privaterc"
 alias sz="source ~/.zshrc"
 
 # C/C++ Compiler Aliases
