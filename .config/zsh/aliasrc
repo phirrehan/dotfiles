@@ -1,9 +1,9 @@
 # System Aliases
-alias ls="ls -a --color"
-alias grep="grep --color"
+alias ls="ls -A --color=auto"
+alias grep="grep --color=auto"
 alias vim="nvim"
 
-# Navigation Aliases
+# Zsh Configuration Aliases
 alias cfa="nvim ~/.config/zsh/aliasrc"
 alias cfs="nvim ~/.config/zsh/shortcutrc"
 alias cfp="nvim ~/.config/zsh/privaterc"
