@@ -15,7 +15,6 @@ HISTFILE=~/.cache/zsh/history
 
 # Exports
 export CLANG_FORMAT_STYLE=~/.config/clang/.clang-format
-export GIT_CONFIG=~/.config/git/.gitconfig
 export PASSWORD_STORE_DIR=~/files/privateFiles/.password-store/
 
 # KeyBindings
