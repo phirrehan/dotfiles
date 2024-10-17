@@ -12,6 +12,7 @@ alias sz="source ~/.zshrc"
 # C/C++ Compiler Aliases
 alias c="clang --debug ~/files/cprograms/prog/practice.c -o ~/files/cprograms/bin/practice && ~/files/cprograms/bin/practice"
 alias cpp="clang++ --debug ~/files/cprograms/prog/practice.cpp -o ~/files/cprograms/bin/practice++ && ~/files/cprograms/bin/practice++"
+alias tc="~/files/privateFiles/scripts/nvimForC.sh"
 
 # GPG encryption/decryption Aliases
 alias enc="gpg -r phirrehan@gmail.com -e"
