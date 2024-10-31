@@ -8,15 +8,33 @@ manual() {
   echo "c                   Compile code in C"
 }
 
+compile() {
+  [ "$cpp" = "true" ] && clang++ --debug $file_path -o $bin_dir/$filename
+  [ "$c" = "true" ] && clang --debug $file_path -o $bin_dir/$filename
+}
+
+run() {
+  [ "$cpp" = "true" ] && $bin_dir/$filename
+  [ "$c" = "true" ] && $bin_dir/$filename
+}
+
 # Variables
-cpp=false                                  # Default cpp flag
-c=false                                    # Default c flag
+[ "$1" = "cpp" ] && cpp="true"             # cpp flag
+[ "$1" = "c" ] && c="true"                 # c flag
 file_dir_path="$HOME/files/cprograms/prog" # Default file directroy
 bin_dir="$HOME/files/cprograms/bin"        # Directory path of compiled binaries of programs
+filename_with_ext=$2                       # File name with extension
+filename="${filename_with_ext%.*}"         # File name without extension
 
-# Check arguments
-[ "$1" = "cpp" ] && cpp="true"
-[ "$1" = "c" ] && c="true"
+## Store file extension if provided
+[[ "$filename_with_ext" == "*.*" ]] && extension="${filename_with_ext##*.}"
+
+## Store default file extension if not provided
+[ "$cpp" = "true" ] && [ -z "$extension" ] && extension=cpp
+[ "$c" = "true" ] && [ -z "$extension" ] && extension=c
+
+## File path
+file_path=$file_dir_path/$filename.$extension
 
 # Check errors
 [ $# -eq 0 ] && echo "Error: no arguments provided" && manual && exit 1
@@ -26,28 +44,13 @@ bin_dir="$HOME/files/cprograms/bin"        # Directory path of compiled binaries
   echo "Use mkdir $file_dir_path command to create it" && exit 4
 [ ! -d "$bin_dir" ] && echo "Error: directory does not exist: $bin_dir" &&
   echo "Use mkdir $bin_dir command to create it" && exit 5
+[ ! -f "$file_path" ] && echo "Error: file does not exist: $file_path" && exit 6
 
-# Get file name and its extension
-filename_with_ext=$2
-filename="${filename_with_ext%.*}"
-[[ "$filename_with_ext" == "*.*" ]] && extension="${filename_with_ext##*.}"
-
-# Return error if incorrect extension is provided
+## Return error if incorrect extension is provided
 [ "$cpp" = "true" ] && [ -n "$extension" ] && [ "$extension" != "cpp" ] &&
-  echo "Error: invalid file extension: $extension" && exit 6
-[ "$c" = "true" ] && [ -n "$extension" ] && [ "$extension" != "c" ] &&
   echo "Error: invalid file extension: $extension" && exit 7
-
-# Write extension if not provided
-[ "$cpp" = "true" ] && [ -z "$extension" ] && extension=cpp
-[ "$c" = "true" ] && [ -z "$extension" ] && extension=c
-
-# Check if file or directory exists
-file_path=$file_dir_path/$filename.$extension
-[ ! -f "$file_path" ] && echo "Error: file does not exist: $file_path" && exit 8
+[ "$c" = "true" ] && [ -n "$extension" ] && [ "$extension" != "c" ] &&
+  echo "Error: invalid file extension: $extension" && exit 8
 
 # Compile and Execute
-[ "$cpp" = "true" ] && clang++ --debug $file_path -o $bin_dir/$filename &&
-  $bin_dir/$filename
-[ "$c" = "true" ] && clang --debug $file_path -o $bin_dir/$filename &&
-  $bin_dir/$filename
+compile && run
