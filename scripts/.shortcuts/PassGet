@@ -2,15 +2,16 @@
 
 # Variables
 password_dir="$HOME/files/privateFiles/.password-store"
-[ $# -eq 1 ] && password_name="$1"
-[ $# -eq 0 ] && pass ls && echo "\nEnter a name of password to fetch: " && read password_name
+
+## Setting environment variable for Termux:Widget
+export PASSWORD_STORE_DIR=$password_dir
+
+## Get password name
+password_name=$(ls $password_dir | sed '/\.gpg-id$/d; s/\.gpg$//' | fzf --pointer '=>' --layout reverse --info hidden --header 'Select a Password')
 
 # Check for errors
-## Check if arguments are greater than 1
-[ $# -gt 1 ] && echo "Too many arguments provided. Usage $0 <password_name>" && exit 1
-
 ## Check if password exists
-[ ! -f "$password_dir/$password_name.gpg" ] && echo "$password_name does not exist." && exit 2
+[ ! -f "$password_dir/$password_name.gpg" ] && echo "$password_name does not exist." && exit 1
 
 # Copy password to clipboard on various environments
 ## Termux specific command

@@ -9,18 +9,18 @@ print_manual() {
   echo "--help ,-h                  show this help"
 }
 
-total_passwords="5" # Setting 5 as default value
+total_passwords="5"            # Setting 5 as default value
 output_path="$HOME/.passwords" # Setting default path to store passwords
-flag_store_pass="OFF" # Setting default Store-Password flag to OFF
+flag_store_pass="OFF"          # Setting default Store-Password flag to OFF
 declare -a password
 
 # Arguments
-for (( i=1; i<=$#; i++ )); do
+for ((i = 1; i <= $#; i++)); do
 
   j=$(expr $i + 1)
   [ "${!i}" = "--store-password" ] && flag_store_pass="ON"
   if [ "${!i}" = "-h" ] || [ "${!i}" = "--help" ]; then
-    print_manual 
+    print_manual
     exit 0
   fi
   [ "${!i}" = "--dir" ] && output_path=${!j}
@@ -29,11 +29,11 @@ done
 
 # Check for errors
 [ -z "$total_passwords" ] && echo "Missing number of passwords to print. Usage: $0 -n <number>" && exit 1
-[[ ! $total_passwords =~ ^[0-9]+$ ]] && 
+[[ ! $total_passwords =~ ^[0-9]+$ ]] &&
   echo "Argument should be an integral number. Usage: $0 -n <integer>" && exit 2
 [ "$total_passwords" -le 0 ] && echo "Invalid number of passwords." && exit 3
 [ ! -d $output_dir ] &&
-echo "The directory to file does not exist. Use mkdir to create it first." && exit 4
+  echo "The directory to file does not exist. Use mkdir to create it first." && exit 4
 
 # Print the line in Yellow color
 echo -e "\n\e[0;32mThis is a simple password generator for linux.\e[0m"
@@ -51,7 +51,7 @@ read pass_length
 
 # Output passwords in Cyan color
 echo -e "\e[0;36m"
-for (( i=1; i<=$total_passwords; i++ )); do
+for ((i = 1; i <= $total_passwords; i++)); do
   echo -n "$i) "
   password[i]=$(openssl rand -base64 48 | cut -c1-$pass_length)
   echo ${password[i]}
@@ -61,8 +61,8 @@ echo -e "\e[0m\n"
 echo "Choose one of the Passwords: "
 read ans
 if [ "$flag_store_pass" = "ON" ]; then
-  echo -n "$service_name: " >> $output_path 
-  echo "${password[$ans]}" >> $output_path
+  echo -n "$service_name: " >>$output_path
+  echo "${password[$ans]}" >>$output_path
 else
-  echo "${password[$ans]}" | termux-clipboard-set
+  termux-clipboard-set ${password[$ans]}
 fi

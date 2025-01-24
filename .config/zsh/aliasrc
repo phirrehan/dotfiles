@@ -3,28 +3,28 @@ alias pacf="$path_to_scripts/pacf.sh"
 alias pacrm="$path_to_scripts/pacrm.sh"
 alias paruf="$path_to_scripts/paruf.sh"
 
-# System Aliases
+# System
 alias ls="ls -A --color=auto"
 alias grep="grep --color=auto"
 
-# Zsh Config Aliases
+# Zsh Config
 alias cfa="nvim ~/.config/zsh/aliasrc"
 alias cfs="nvim ~/.config/zsh/shortcutrc"
 alias cfp="nvim ~/files/privateFiles/.zsh/privaterc"
 alias sz="source ~/.zshrc"
 
-# C/C++ Compiler Aliases
+# C/C++ Compiler
 alias c="$path_to_scripts/c_compile.sh c practice.c"
 alias cpp="$path_to_scripts/c_compile.sh cpp practice.cpp"
 alias cn="$path_to_scripts/c_compile.sh c $1"
 alias cppn="$path_to_scripts/c_compile.sh cpp $1"
 alias tc="$path_to_scripts/nvimForC.sh"
 
-# Latex Compiler Aliases
+# Latex Compiler
 alias ltxp="$path_to_scripts/latex_compiler.sh pdf $1"
 alias ltxd="$path_to_scripts/latex_compiler.sh dvi $1"
 
-# GPG encryption/decryption Aliases
+# GPG encryption/decryption
 alias enc="gpg -r phirrehan@gmail.com -e"
 alias dec="gpg -d"
 
