@@ -9,13 +9,15 @@ manual() {
 }
 
 compile() {
-  [ "$cpp" = "true" ] && clang++ --debug $file_path -o $bin_dir/$filename
-  [ "$c" = "true" ] && clang --debug $file_path -o $bin_dir/$filename
+  if [ "$cpp" = "true" ]; then
+    clang++ --debug $file_path -o $bin_dir/$filename
+  else
+  clang --debug $file_path -o $bin_dir/$filename
+  fi
 }
 
 run() {
-  [ "$cpp" = "true" ] && $bin_dir/$filename
-  [ "$c" = "true" ] && $bin_dir/$filename
+  $bin_dir/$filename
 }
 
 # Variables

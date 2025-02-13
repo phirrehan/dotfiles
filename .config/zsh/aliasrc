@@ -1,28 +1,23 @@
-# Package Managers
-alias pacf="$path_to_scripts/pacf.sh"
-alias pacrm="$path_to_scripts/pacrm.sh"
-alias paruf="$path_to_scripts/paruf.sh"
-
 # System
 alias ls="ls -A --color=auto"
 alias grep="grep --color=auto"
 
 # Zsh Config
+alias cfz="nvim ~/.zshrc"
 alias cfa="nvim ~/.config/zsh/aliasrc"
 alias cfs="nvim ~/.config/zsh/shortcutrc"
 alias cfp="nvim ~/files/privateFiles/.zsh/privaterc"
 alias sz="source ~/.zshrc"
 
 # C/C++ Compiler
-alias c="$path_to_scripts/c_compile.sh c practice.c"
-alias cpp="$path_to_scripts/c_compile.sh cpp practice.cpp"
-alias cn="$path_to_scripts/c_compile.sh c $1"
-alias cppn="$path_to_scripts/c_compile.sh cpp $1"
-alias tc="$path_to_scripts/nvimForC.sh"
+alias c="$HOME/.local/bin/c_compile c practice.c"
+alias cpp="$HOME/.local/bin/c_compile cpp practice.cpp"
+alias cn="$HOME/.local/bin/c_compile c $1"
+alias cppn="$HOME/.local/bin/c_compile cpp $1"
 
 # Latex Compiler
-alias ltxp="$path_to_scripts/latex_compiler.sh pdf $1"
-alias ltxd="$path_to_scripts/latex_compiler.sh dvi $1"
+alias ltxp="$HOME/.local/bin/latex_compiler pdf $1"
+alias ltxd="$HOME/.local/bin/latex_compiler dvi $1"
 
 # GPG encryption/decryption
 alias enc="gpg -r phirrehan@gmail.com -e"
@@ -30,3 +25,15 @@ alias dec="gpg -d"
 
 # Nvim
 alias vim="nvim"
+
+# Functions
+pacf() {
+  pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S
+}
+pacrm() {
+  pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns
+}
+paruf() {
+  paru -Slq | fzf --multi --preview 'paru -Si {1}' | xargs -ro paru -S
+}
+

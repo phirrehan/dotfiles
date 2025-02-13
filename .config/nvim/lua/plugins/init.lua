@@ -34,8 +34,6 @@ return {
         "prettier",
         "gopls",
         "typescript-language-server",
-        "clang-format",
-        "clangd",
       },
     },
   },
