@@ -1,17 +1,24 @@
+# Termux
+if [ -n "$TERMUX_VERSION" ]; then
+  alias i="nala update && nala install $1"
+  alias u="nala update && nala uninstall $1"
+  alias s="nala search $1"
+  alias upg="nala update && nala upgrade"
+  alias c="clear"
+fi
+
 # System
 alias ls="ls -A --color=auto"
 alias grep="grep --color=auto"
 
 # Zsh Config
 alias cfz="nvim ~/.zshrc"
-alias cfa="nvim ~/.config/zsh/aliasrc"
-alias cfs="nvim ~/.config/zsh/shortcutrc"
-alias cfp="nvim ~/files/privateFiles/.zsh/privaterc"
+alias cfa="nvim ~/.config/zsh/aliases"
+alias cfs="nvim ~/.config/zsh/shortcuts"
+alias cfp="nvim ~/files/privateFiles/zsh/private"
 alias sz="source ~/.zshrc"
 
 # C/C++ Compiler
-alias c="$HOME/.local/bin/c_compile c practice.c"
-alias cpp="$HOME/.local/bin/c_compile cpp practice.cpp"
 alias cn="$HOME/.local/bin/c_compile c $1"
 alias cppn="$HOME/.local/bin/c_compile cpp $1"
 

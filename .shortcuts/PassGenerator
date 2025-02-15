@@ -47,7 +47,7 @@ echo "Please enter the length of the password: "
 read pass_length
 [[ ! $pass_length =~ ^[0-9]+$ ]] && echo "Warning: Enter an integral number for password length." && exit 5
 [ $pass_length -lt 1 ] && echo "Invalid length of password" && exit 6
-[ $pass_length -gt 65 ] && ehco "Warning: Length is too large." && exit 7
+[ $pass_length -gt 65 ] && echo "Warning: Length is too large." && exit 7
 
 # Output passwords in Cyan color
 echo -e "\e[0;36m"
@@ -64,5 +64,5 @@ if [ "$flag_store_pass" = "ON" ]; then
   echo -n "$service_name: " >>$output_path
   echo "${password[$ans]}" >>$output_path
 else
-  termux-clipboard-set ${password[$ans]}
+  ~/scripts/clipboard.sh "${password[$ans]}"
 fi
