@@ -1,0 +1,4 @@
+#!/bin/bash
+
+warp-cli status | grep -qi "disconnected" &&
+  warp-cli connect || warp-cli disconnect

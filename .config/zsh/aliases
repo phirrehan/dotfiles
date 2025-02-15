@@ -1,9 +1,9 @@
 # Termux
 if [ -n "$TERMUX_VERSION" ]; then
   alias i="nala update && nala install $1"
-  alias u="nala update && nala uninstall $1"
+  alias rem="nala remove $1"
   alias s="nala search $1"
-  alias upg="nala update && nala upgrade"
+  alias u="nala update && nala upgrade"
   alias c="clear"
 fi
 
@@ -19,12 +19,12 @@ alias cfp="nvim ~/files/privateFiles/zsh/private"
 alias sz="source ~/.zshrc"
 
 # C/C++ Compiler
-alias cn="$HOME/.local/bin/c_compile c $1"
-alias cppn="$HOME/.local/bin/c_compile cpp $1"
+alias cn="$scriptsDir/c_compile c $1"
+alias cppn="$scriptsDir/c_compile cpp $1"
 
 # Latex Compiler
-alias ltxp="$HOME/.local/bin/latex_compiler pdf $1"
-alias ltxd="$HOME/.local/bin/latex_compiler dvi $1"
+alias ltxp="$scriptsDir/latex_compiler pdf $1"
+alias ltxd="$scriptsDir/latex_compiler dvi $1"
 
 # GPG encryption/decryption
 alias enc="gpg -r phirrehan@gmail.com -e"
