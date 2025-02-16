@@ -4,33 +4,24 @@
 [ -n "$TERMUX_VERSION" ] && PDFVIEWER="termux-open" ||
   PDFVIEWER="okular" # Change this to your favourite desktop pdf viewer
 
-
 if [ "$PDFVIEWER" = "okular" ]; then
   command -v okular &>/dev/null || {
-  echo "Error: okular is not installed"
-  exit 1 
+    echo "Error: okular is not installed"
+    exit 1
   }
 fi
 
 # Functions
 menu() {
-    fzf --pointer '=>' --header 'Select a PDF' --layout reverse \
+  fzf --pointer '=>' --header 'Select a PDF' --layout reverse \
     --info hidden --preview "pdftotext -f 1 -l 5 $pdfsDir/{} - 2> /dev/null" \
-        --preview-window=wrap,border-sharp
+    --preview-window=wrap,border-sharp
 }
 
-# Check for -d flag
-if [ "$1" = "-d" ];then
-  [ -d "$2" ] &&
-  pdfsDir="$2" || {
-    echo "Invalid path to directory"
-    exit 2
-  }
-fi
-
+[ "$1" = "-d" ] && pdfsDir="$2"
 # Replace ~ with $HOME if present in pdfsDir
 [ "$(echo $pdfsDir | cut -c 1)" = "~" ] &&
-  pdfsDir=$(echo $pdfsDir |
+  pdfsDir=$(echo -n $pdfsDir |
     sed "s|~|$HOME|")
 
 # Search through $pdfsDir
@@ -38,4 +29,4 @@ pdfPath=$pdfsDir/"$(ls $pdfsDir |
   grep "^.*\.pdf$" | menu)"
 
 # Run Selected pdf
-$PDFVIEWER "$pdfPath"
+[ -n "$pdfPath" ] && $PDFVIEWER "$pdfPath"
