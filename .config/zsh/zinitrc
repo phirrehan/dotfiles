@@ -39,7 +39,7 @@ bindkey '^n' history-search-forward
 zinit snippet OMZP::git
 
 # Load completions
-autoload -Uz compinit && compinit -d "$HOME/.cache/zsh/" &> /dev/null
+autoload -Uz compinit && compinit -d "$HOME/.cache/zsh/.zcompdump" &> /dev/null
 
 zinit cdreplay -q
 

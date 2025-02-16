@@ -64,5 +64,5 @@ if [ "$flag_store_pass" = "ON" ]; then
   echo -n "$service_name: " >>$output_path
   echo "${password[$ans]}" >>$output_path
 else
-  ~/scripts/clipboard.sh "${password[$ans]}"
+  ~/.local/bin/clipboard "${password[$ans]}"
 fi

@@ -35,12 +35,15 @@ alias vim="nvim"
 
 # Functions
 pacf() {
-  pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S
+  pacman -Slq | fzf --multi --preview 'pacman -Si {1}' \
+  --preview-window=wrap,border-sharp | xargs -ro sudo pacman -S
 }
 pacrm() {
-  pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns
+  pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' \
+  --preview-window=wrap,border-sharp | xargs -ro sudo pacman -Rns
 }
 paruf() {
-  paru -Slq | fzf --multi --preview 'paru -Si {1}' | xargs -ro paru -S
+  paru -Slq | fzf --multi --preview 'paru -Si {1}' \ 
+  --preview-window=wrap,border-sharp | xargs -ro paru -S
 }
 
