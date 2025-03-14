@@ -1,5 +1,4 @@
 # My dotfiles
-
 This repository contains the dotfiles for both my desktop and termux. It uses Arch Linux package manager pacman and for termux it uses pkg. If you have a different linux distribution, replace pacman with your distribution's package manager. Note: in case of termux environment, both pkg or apt can be used 
 
 ## Requirements
@@ -11,21 +10,21 @@ sudo pacman -Sy
 sudo pacman -S git stow --needed
 ```
 
-These dotfiles contains configurations for zsh, neovim, tmux, foot and clang. Install these applications for using my dotfiles:
+These dotfiles contains configurations for `zsh`, `neovim`, `tmux`, `foot` and `clang`. Install these applications for using my dotfiles:
 
 ```
 sudo pacman -S zsh neovim tmux foot clang --needed
 ```
 ## Cloning Repository
 
-Clone this repository to your $HOME directory
+Clone this repository to your `$HOME` directory
 ```
 cd ~
 git clone --recurse-submodules https://github.com/phirrehan/dotfiles.git
 ```
 ## Setting up Symlinks
 
-Use stow to create sym links from $HOME/dotfiles to $HOME, $HOME/.local/bin and $HOME/.config/ to setup configurations and scripts.
+Use stow to create sym links from `$HOME/dotfiles` to `$HOME`, `$HOME/.local/bin` and `$HOME/.config/` to setup configurations and scripts.
 
 ```
 cd dotfiles
@@ -41,7 +40,7 @@ chsh -s $(which zsh)
 
 ## Setting a Nerd Font
 
-This font is useful for nvim and tmux configurations. If you do not need those, you can skip this step. Install a nerd font of your choice. I personally like to use JetBrainsMono nerd font.
+This font is useful for nvim and tmux configurations. If you do not need those, you can skip this step. Install a nerd font of your choice. I personally like to use `JetBrainsMono` Nerd font.
 
 ```
 sudo pacman -S ttf-jetbrains-mono-nerd
@@ -49,7 +48,7 @@ sudo pacman -S ttf-jetbrains-mono-nerd
 
 ## Setting Up Zsh
 
-Use the following command to source .zshrc
+Use the following command to source .zshrc file
 
 ```
 source ~/.zshrc
@@ -83,13 +82,13 @@ Neovim will lazy load everything when it is opened for the first time. It may ta
 
 ## Scripts
 
-All the scripts are located in ~/.local/bin which is added to PATH variable in .zprofile. Thus writing the full path of a script in this directory is not needed. For example, for executing ~/.local/bin/c-compile the path can be omitted and be directly written as c-compile.
+All the scripts are located in ~/.local/bin which is added to PATH variable in .zprofile. Thus writing the full path of a script in this directory is not needed. For example, for executing ~/.local/bin/run the path can be omitted and be directly written as run.
 
 ## Termux Setup
 
 ### Clean Login
 
-To stop the text from appearing in termux startup, create a .hushlogin in file at home directory.
+To stop the text from appearing in termux startup, create a .hushlogin file at home directory.
 
 ```
 touch ~/.hushlogin
@@ -107,17 +106,19 @@ This creates a ~/storage directory. This directory contains symlinks to phone's 
 
 ### Termux:API
 
-Most of the useful scripts use a termux package called Termux:API. Install this using pkg for a funtional experience.
+Most of the useful scripts use a termux package called `Termux:API`. Install this using pkg for a funtional experience.
 
 ```
 pkg update && pkg install termux-api
 ```
 
-Take a look at the [official documentation](https://wiki.termux.com/wiki/Termux:API) of Termux:API for a list of things this package can do.
+Take a look at the [official documentation](https://wiki.termux.com/wiki/Termux:API) of `Termux:API` for a list of things this package can do.
 
 ### Termux:Widget
 
-To add a widget of termux in phone's launcher, install Termux:Widget from F-droid. It displays a list of scripts stored in ~/.shortcuts which can be run with the press of a button. Copy ~/dotfiles/.shortcuts/ over to home directory. Note: symlink to home does not work.
+To add a widget of termux in phone's launcher, install `Termux:Widget` from F-droid. It displays a list of scripts stored in ~/.shortcuts which can be run with the press of a button. Copy ~/dotfiles/.shortcuts/ over to home directory.
+
+> Note: symlink to home does not work.
 
 ```
 cp -r ~/dotfiles/.shortcuts/ ~/
@@ -129,7 +130,7 @@ Termux-tasker is yet another plugin which connects termux with a third-party tas
 
 ### Package Manager
 
-Using termux's package manager can be slow and monotonous to the eyes. For this case a wrapper is used instead which is called nala. Install nala with pkg and start using it.
+Using termux's package manager(apt, pkg) can be slow and monotonous to the eyes. For this case a wrapper is used instead which is called nala. Install nala with pkg and start using it.
 
 ```
 pkg update && pkg install nala

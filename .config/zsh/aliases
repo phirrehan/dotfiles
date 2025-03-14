@@ -5,6 +5,19 @@ if [ -n "$TERMUX_VERSION" ]; then
   alias s="nala search $1"
   alias u="nala update && nala upgrade"
   alias c="clear"
+else
+  pacf() {
+    pacman -Slq | fzf --multi --preview 'pacman -Si {1}' \
+    --preview-window=wrap,border-sharp | xargs -ro sudo pacman -S
+  }
+  pacrm() {
+    pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' \
+    --preview-window=wrap,border-sharp | xargs -ro sudo pacman -Rns
+  }
+  paruf() {
+    paru -Slq | fzf --multi --preview 'paru -Si {1}' \
+    --preview-window=wrap,border-sharp | xargs -ro paru -S
+}
 fi
 
 # System
@@ -18,32 +31,9 @@ alias cfs="nvim ~/.config/zsh/shortcuts"
 alias cfp="nvim ~/files/privateFiles/zsh/private"
 alias sz="source ~/.zshrc"
 
-# C/C++ Compiler
-alias cn="$scriptsDir/c_compile c $1"
-alias cppn="$scriptsDir/c_compile cpp $1"
-
-# Latex Compiler
-alias ltxp="$scriptsDir/latex_compiler pdf $1"
-alias ltxd="$scriptsDir/latex_compiler dvi $1"
-
 # GPG encryption/decryption
 alias enc="gpg -r phirrehan@gmail.com -e"
 alias dec="gpg -d"
 
 # Nvim
 alias vim="nvim"
-
-# Functions
-pacf() {
-  pacman -Slq | fzf --multi --preview 'pacman -Si {1}' \
-  --preview-window=wrap,border-sharp | xargs -ro sudo pacman -S
-}
-pacrm() {
-  pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' \
-  --preview-window=wrap,border-sharp | xargs -ro sudo pacman -Rns
-}
-paruf() {
-  paru -Slq | fzf --multi --preview 'paru -Si {1}' \ 
-  --preview-window=wrap,border-sharp | xargs -ro paru -S
-}
-

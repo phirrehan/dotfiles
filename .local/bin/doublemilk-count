@@ -3,13 +3,13 @@
 [ -z "$MILK_LIST" ] && MILK_LIST="$HOME/files/privateFiles/milk_list"
 
 # Functions
-writeNagha() {
-  # writeNagha expects 1 argument for name of person.
+writeDouble() {
+  # writeDouble expects 1 argument for name of person.
 
   file="$MILK_LIST/$1/$recordName"
   [ ! -f "$file" ] && touch $file
-  grep -iq "$naghaDate" "$file" || 
-    echo "Nagha on $naghaDate" >> "$file"
+  grep -iq "$doubleDate" "$file" || 
+    echo "Double Milk on $doubleDate" >> "$file"
 }
 
 # Check for errors
@@ -33,7 +33,7 @@ esac
   
 
 # Input
-read -p "Enter number of days passed since Nagha: " input
+read -p "Enter number of days from today: " input
 [ -z "$input" ] && input='0'
 [[ "$input" =~ ^-?[0-9]+$ ]] || {
   echo "Error: invalid input." 
@@ -41,16 +41,16 @@ read -p "Enter number of days passed since Nagha: " input
 }
 
 # Date format: YYYY-MM and YYYY-MM-DD respectively
-recordName=$(date -d "$input days ago" +%Y-%m)
-naghaDate=$(date -d "$input days ago" +%Y-%m-%d)
+recordName=$(date -d "$input days" +%Y-%m)
+doubleDate=$(date -d "$input days" +%Y-%m-%d)
 
 # Abji
-[ "$abji" = "true" ] && writeNagha abji
+[ "$abji" = "true" ] && writeDouble abji
 
 # Tai Ammi
-[ "$taiAmmi" = "true" ] && writeNagha taiAmmi
+[ "$taiAmmi" = "true" ] && writeDouble taiAmmi
 
-echo -e "Naghas written successfully!\n"
+echo -e "Double Milk written successfully!\n"
 [ "$taiAmmi" = "true" ] && echo "Tai Ammi's Record" &&
   cat $MILK_LIST/taiAmmi/$recordName
 [ "$abji" = "true" ] && echo -e "\nAbji's Record" &&

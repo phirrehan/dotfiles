@@ -16,10 +16,11 @@ password_name=$(ls $password_dir | sed '/\.gpg-id$/d; s/\.gpg$//' | fzf --pointe
 
 # Check for errors
 ## Check if password exists
+[ -z "$password_name" ] && exit
 [ ! -f "$password_dir/$password_name.gpg" ] && echo "$password_name does not exist." && exit 2
 
 # Copy password to clipboard on various environments
-pass "$password_name" | ~/.local/bin/clipboard
+ pass "$password_name" | ~/.local/bin/clipboard
 
 # Add a new line at the end of script
 echo ""

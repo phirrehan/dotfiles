@@ -1,0 +1,30 @@
+#!/bin/bash
+
+compileHasFailed=false # boolean variable
+mkdir ./bin 2>/dev/null || {
+  echo "./bin is already present. Do you want to remove it (y/N)?"
+  read ans
+  if [ "${ans^^}" = "Y" ]; then
+    echo "Deleting ./bin ..."
+    rm -rfv ./bin
+    mkdir ./bin
+  elif [ "${ans^^}" = "N" -o "$ans" = "" ]; then
+    exit 1
+  else
+    echo "Incorrect input. Exiting..."
+    exit 2
+  fi
+}
+for file in $(ls); do
+  file_without_ext="${file%.*}"
+  file_ext="${file##*.}"
+  if [ "$file_ext" = "cpp" ]; then
+    clang++ "$file" -o "./bin/$file_without_ext.exe" 2>>./log.txt &&
+      echo -e "\e[0;32m $file compiled successfully" || {
+        echo -e "\e[0;31m $file failed to compile"
+        compileHasFailed=true
+      }
+      echo -en "\e[0m"
+  fi
+done
+[ "$compileHasFailed" = "true" ] && rm -rf ./bin
