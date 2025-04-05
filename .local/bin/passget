@@ -4,7 +4,8 @@
 password_dir="$HOME/files/privateFiles/.password-store"
 
 ## Setting environment variable for Termux:Widget
-export PASSWORD_STORE_DIR=$password_dir
+PASSWORD_STORE_DIR=$password_dir
+export PASSWORD_STORE_DIR
 
 # Check for dependencies
 [ ! -f "$HOME/.local/bin/clipboard" ] && 

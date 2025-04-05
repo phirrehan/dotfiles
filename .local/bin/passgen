@@ -3,8 +3,6 @@
 manual() {
   echo -e "\nUsage: $0 [OPTIONS]\n"
   echo "[OPTIONS]                   [FUNCTIONS]"
-  echo "--store-password            enable feature for storing password (default directory is ~/passwords)"
-  echo "--dir <path_of_file>        specify a path for storing passwords"
   echo "-n <number_of_passwords>    generate given number of passwords"
   echo "--help ,-h                  show this help"
 }
@@ -14,8 +12,7 @@ manual() {
   echo "Dependency $HOME/.local/bin/clipboard not found." &&
   exit 1
 
-total_passwords="5"            # Setting 5 as default value
-declare -a password
+declare -a password     # Declare array for passwords
 
 # Arguments
 for i in $(seq 1 $#); do
@@ -28,25 +25,25 @@ done
 
 # Check for errors
 [[ ! $total_passwords =~ ^[0-9]+$ ]] &&
-  echo "Argument should be an integral number. \
-  Usage: $0 -n <integer>" && exit 2
+  echo "Argument must be a number(positive integer). \
+  Usage: $0 -n <number>" && exit 2
   [ "$total_passwords" -le 0 ] &&
     echo "Invalid number of passwords." && exit 3
 
 # Print the line in Yellow color
 echo -e "\n\e[0;32mThis is a simple password generator for linux.\e[0m"
 
-echo "Please enter the length of the password: "
+echo "Enter the length of the password: "
 read pass_length
 [[ ! $pass_length =~ ^[0-9]+$ ]] &&
-  echo "Error: Enter an integral number for password length." && exit 4
+  echo "Error: Enter a number(integer) for password length." && exit 4
 [ $pass_length -lt 1 ] && echo "Invalid length of password" && exit 5
 [ $pass_length -gt 65 ] && echo "Warning: Maximum Length is 65 characters."
 
 # Output passwords in Cyan color
 echo -e "\e[0;36m"
 for num in $(seq $total_passwords); do
-  echo -n "$i) "
+  echo -n "$num) "
   password[num]=$(openssl rand -base64 48 | cut -c1-$pass_length)
   echo ${password[num]}
 done
