@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd /home/rehan/files/Piano
+make 2>/dev/null && ./main
