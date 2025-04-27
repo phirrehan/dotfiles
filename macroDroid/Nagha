@@ -1,3 +1,0 @@
-#!/bin/bash
-
-"$HOME/dotfiles/.local/bin/milk-record" nagha
