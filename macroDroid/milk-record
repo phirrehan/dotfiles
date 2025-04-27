@@ -33,7 +33,7 @@ writeDouble() {
 }
 displayRecord() {
   # displayRecrod() expects 1 argument for name of person.
-  echo "$1's Record" &&
+  echo -e "$1's Record\n" &&
     cat $MILK_LIST_DIR/$1/$recordName && echo ""
 }
 
