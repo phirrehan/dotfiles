@@ -21,7 +21,8 @@ else
 fi
 
 # System
-alias ls="ls -A --color=auto"
+alias ls="ls --color=auto"
+alias Ls="ls -A --color=auto"
 alias grep="grep --color=auto"
 
 # Zsh Config
