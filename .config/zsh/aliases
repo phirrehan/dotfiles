@@ -38,3 +38,6 @@ alias dec="gpg -d"
 
 # Nvim
 alias vim="nvim"
+
+# Compile C++ code using Makefile
+alias compile="make && ./main"
