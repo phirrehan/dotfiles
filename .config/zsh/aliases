@@ -40,4 +40,4 @@ alias dec="gpg -d"
 alias vim="nvim"
 
 # Compile C++ code using Makefile
-alias compile="make && ./main"
+alias compile="g++ main.cpp -lncurses -o main && ./main"
