@@ -35,9 +35,6 @@ bindkey -e
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 
-# Add Snippets
-zinit snippet OMZP::git
-
 # Load completions
 autoload -Uz compinit && compinit -d "$HOME/.cache/zsh/.zcompdump" &> /dev/null
 
