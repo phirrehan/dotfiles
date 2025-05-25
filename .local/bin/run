@@ -4,14 +4,14 @@ PDFVIEWER="zathura"
 
 # Functions
 manual() {
-echo "This script runs a program without leaving any residue file in system. It can run C, C++, python, and LaTeX codes. It can run multiple files."
-echo "Dependencies:"
-echo "For C/C++: clang"
-echo "For Python: python"
-echo "For LaTeX: texlive\n"
-echo "Usage: $0 /path/to/file1 /path/to/file2 ..."
-# echo "The --arg option is used to pass arguments to the program's binary."
-echo "Use --help or -h options to print this manual."
+  echo "This script runs a program without leaving any residue file in system. It can run C, C++, python, and LaTeX codes. It can run multiple files."
+  echo "Dependencies:"
+  echo "For C/C++: clang"
+  echo "For Python: python"
+  echo "For LaTeX: texlive\n"
+  echo "Usage: $0 /path/to/file1 /path/to/file2 ..."
+  # echo "The --arg option is used to pass arguments to the program's binary."
+  echo "Use --help or -h options to print this manual."
 }
 
 PY() {
@@ -26,12 +26,8 @@ C() {
 }
 
 CPP() {
-  if grep -q "^\s*#include\s*<SFML/[A-Za-z]*\.hpp>\s*$" "$file_path"; then
-  clang++ -c "$file_path" &&
-    clang++ "$file_dir/$file_without_ext.o" -o "$file_dir/$file_without_ext.exe" -lsfml-graphics -lsfml-window -lsfml-system && {
-      "$file_dir/$file_without_ext.exe" &&
-      rm "$file_dir/$file_without_ext.o" "$file_dir/$file_without_ext.exe"
-    }
+  if ls | grep -q "Makefile"; then
+    make >/dev/null && ./main && rm main
   else
     clang++ "$file_path" -o "$file_dir/$file_without_ext.exe" && {
       "$file_dir/$file_without_ext.exe"
@@ -41,7 +37,7 @@ CPP() {
 }
 
 TEX() {
-  pdflatex "$file_path" > /dev/null && {
+  pdflatex "$file_path" >/dev/null && {
     $PDFVIEWER "$file_dir/$file_without_ext.pdf"
     rm "$file_dir/$file_without_ext.pdf"
     rm "$file_dir/$file_without_ext.aux"
@@ -53,7 +49,7 @@ for arg in $@; do
   [ "$arg" = "--help" -o "$arg" = "-h" ] && manual && exit 0
   [ -f $arg ] || {
     echo -e "\e[0;31mError: file not found. \e[0m" &&
-    exit 1
+      exit 1
   }
 done
 
@@ -64,11 +60,11 @@ for arg in $@; do
   file_without_ext="${file_name%.*}"
   file_ext="${file_name##*.}"
 
-  case $file_ext in 
-    'c') C;;
-    'cpp') CPP;;
-    'py') PY;;
-    'tex') TEX;;
-    *) echo -e "\e[0;31mInvalid file format. Exiting...\e[0m" && exit 2;;
+  case $file_ext in
+  'c') C ;;
+  'cpp') CPP ;;
+  'py') PY ;;
+  'tex') TEX ;;
+  *) echo -e "\e[0;31mInvalid file format. Exiting...\e[0m" && exit 2 ;;
   esac
 done
