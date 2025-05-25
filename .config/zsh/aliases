@@ -17,7 +17,8 @@ else
   paruf() {
     paru -Slq | fzf --multi --preview 'paru -Si {1}' \
     --preview-window=wrap,border-sharp | xargs -ro paru -S
-}
+  }
+
 fi
 
 # System
@@ -40,4 +41,4 @@ alias dec="gpg -d"
 alias vim="nvim"
 
 # Compile C++ code using Makefile
-alias compile="g++ main.cpp -lncurses -o main && ./main"
+alias compile="make > /dev/null && ./main"
