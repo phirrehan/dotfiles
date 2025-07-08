@@ -37,7 +37,7 @@ CPP() {
 }
 
 TEX() {
-  pdflatex "$file_path" >/dev/null && {
+  pdflatex -no-shell-escape -halt-on-error -interaction=nonstopmode "$file_path" >/dev/null && {
     $PDFVIEWER "$file_dir/$file_without_ext.pdf"
     rm "$file_dir/$file_without_ext.pdf"
     rm "$file_dir/$file_without_ext.aux"
