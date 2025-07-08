@@ -1,5 +1,6 @@
 #!/bin/bash
 
+export PASSWORD_STORE_DIR="$HOME/files/Passwords/store"
 passName=$1   # First Argument is name of password
 passLength=$2 # Second Argument is length of password
 [ -z "$passLength" ] && passLength=20
