@@ -1,5 +1,6 @@
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
+export EDITOR="nvim"
 export PATH="$PATH:$HOME/.local/bin"
 
 export PASSWORD_STORE_DIR="$HOME/files/Passwords/store"
