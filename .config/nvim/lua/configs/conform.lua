@@ -1,8 +1,8 @@
 -- Setup Conform with options
 require("conform").setup {
   formatters_by_ft = {
-    c = { "c_gnu_format" },
-    cpp = { "c_gnu_format" },
+    c = { "clang-format" },
+    cpp = { "clang-format" },
     python = { "autopep8" },
     bash = { "shfmt" },
     sh = { "shfmt" },
@@ -24,13 +24,6 @@ require("conform").setup {
     ["markdown.mdx"] = { "prettierd", "prettier" },
     graphql = { "prettierd", "prettier" },
     handlebars = { "prettierd", "prettier" },
-  },
-
-  formatters = {
-    c_gnu_format = {
-      command = "clang-format",
-      args = '--style="{BasedOnStyle: LLVM, Cpp11BracedListStyle: false}"',
-    },
   },
 
   format_after_save = function(bufnr)

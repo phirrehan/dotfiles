@@ -11,9 +11,8 @@ require("jaq-nvim").setup {
       markdown = "glow '%'",
       python = "python3 '%'",
       go = "go run '%'",
+      -- go = "go run %",
       sh = "sh '%'",
-      c = "run '%'",
-      cpp = "run '%'",
     },
   },
 
@@ -44,8 +43,8 @@ require("jaq-nvim").setup {
       winblend = 0,
 
       -- Num from `0-1` for measurements
-      height = 0.9,
-      width = 0.9,
+      height = 0.8,
+      width = 0.8,
       x = 0.5,
       y = 0.5,
     },

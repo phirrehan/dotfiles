@@ -33,7 +33,13 @@ return {
         "pyright",
         "prettier",
         "gopls",
+        "goimports",
+        "goimports-reviser",
+        "shfmt",
         "typescript-language-server",
+        "clang-format",
+        "autopep8",
+        "templ",
       },
     },
   },
@@ -87,11 +93,11 @@ return {
     "rcarriga/nvim-notify",
   },
   {
-    "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    ft = { "markdown" },
-    build = function()
-      vim.fn["mkdp#util#install"]()
+    "toppair/peek.nvim",
+    event = { "VeryLazy" },
+    build = "deno task --quiet build:fast",
+    config = function()
+      require "configs.peek"
     end,
   },
   {

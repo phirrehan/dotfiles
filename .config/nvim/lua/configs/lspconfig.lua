@@ -6,7 +6,7 @@ local on_init = config.on_init
 
 local lspconfig = require "lspconfig"
 
-local servers = { "html", "cssls", "ts_ls", "pyright", "lua_ls", "jsonls", "hyprls" }
+local servers = { "html", "cssls", "ts_ls", "pyright", "lua_ls", "jsonls", "hyprls", "templ" }
 
 -- lsps with default config
 for _, lsp in ipairs(servers) do
@@ -16,15 +16,6 @@ for _, lsp in ipairs(servers) do
     capabilities = capabilities,
   }
 end
-
-lspconfig.clangd.setup {
-  on_attach = function(client, bufnr)
-    client.server_capabilities.signatureHelpProvider = false
-    on_attach(client, bufnr)
-  end,
-  on_init = on_init,
-  capabilities = capabilities,
-}
 
 lspconfig.gopls.setup {
   on_attach = on_attach,
