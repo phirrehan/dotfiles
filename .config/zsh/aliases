@@ -33,12 +33,5 @@ alias cfs="nvim ~/.config/zsh/shortcuts"
 alias cfp="nvim ~/files/privateFiles/zsh/private"
 alias sz="source ~/.zshrc"
 
-# GPG encryption/decryption
-alias enc="gpg -r phirrehan@gmail.com -e"
-alias dec="gpg -d"
-
 # Nvim
 alias vim="nvim"
-
-# Compile C++ code using Makefile
-alias compile="make > /dev/null && ./main"
