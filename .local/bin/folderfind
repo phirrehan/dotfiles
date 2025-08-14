@@ -2,19 +2,18 @@
 
 # Run fzfmenu.sh to get the selected directory
 selected_dir=$(fd --type directory --hidden . ~ | ~/.local/bin/fzfmenu)
-program=$(
+[ -z "$selected_dir" ] && exit 1
+
+# Get the action to perform
+index=$(
   printf "1 Terminal Tmux\n2 Dolphin" |
     ~/.local/bin/fzfmenu |
-    awk '{print $1}'
+    awk '{ print $1 }'
 )
+[ -z "$index" ] && exit 2
 
-# Check if a directory was selected
-if [ -n "$selected_dir" ]; then
-  # Open direcotry in neovim under tmux session
-  if [ "$program" = "1" ]; then
-    foot --working-directory "$selected_dir" -e sh -c "tmux -u new-session"
-  # Open directory in file explorer
-  elif [ "$program" = "2" ]; then
-    dolphin "$selected_dir"
-  fi
-fi
+# Perform the action
+case $index in
+1) foot --working-directory "$selected_dir" -e sh -c "tmux -u new-session" ;;
+2) dolphin "$selected_dir" ;;
+esac
