@@ -3,6 +3,7 @@
 read -p "Enter name of password: " passName
 read -p "Enter length of password: " passLength
 [[ ! "$passLength" =~ ^[0-9]+$ ]] &&
-  echo "Error: invalid input. expected a number(positive)" &&
+  echo "Error: Expected a Positive Number" &&
   read -p "Press enter to exit." && exit 1
 pass generate -c $passName $passLength
+echo "" && read -p "Press enter to exit"
