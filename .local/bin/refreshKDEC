@@ -1,4 +1,0 @@
-#!/bin/bash
-
-pkill kdeconnect
-kdeconnect-cli --refresh

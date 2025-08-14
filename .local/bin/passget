@@ -1,7 +1,7 @@
 #!/bin/sh
 
-## Get password name
-password_name=$(ls $PASSWORD_STORE_DIR | sed 's/\.gpg$//' | fzf --pointer '=>' --layout reverse --info hidden --header 'Select a Password')
+# Get password name
+password_name=$(ls $PASSWORD_STORE_DIR | sed 's/\.gpg$//' | ~/.local/bin/fzfmenu "Select a Password")
 
 # Exit if no password is selected
 [ -z "$password_name" ] && exit

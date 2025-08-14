@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Run fzfmenu.sh to get the selected directory
-selected_dir=$(fd --type directory --hidden . ~ | ~/.local/bin/fzfmenu)
+selected_dir=$(fd --type directory --hidden . ~ | ~/.local/bin/fzfmenu "Select a directory")
 [ -z "$selected_dir" ] && exit 1
 
 # Get the action to perform
 index=$(
   printf "1 Terminal Tmux\n2 Dolphin" |
-    ~/.local/bin/fzfmenu |
+    ~/.local/bin/fzfmenu "Choose an action" |
     awk '{ print $1 }'
 )
 [ -z "$index" ] && exit 2
