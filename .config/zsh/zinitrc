@@ -32,8 +32,12 @@ setopt hist_find_no_dups
 
 # KeyBindings
 bindkey -v
-bindkey '^p' history-search-backward
-bindkey '^n' history-search-forward
+bindkey "^F" vi-forward-char
+bindkey "^P" history-search-backward
+bindkey "^N" history-search-forward
+bindkey "^U" backward-kill-line
+bindkey "^?" backward-delete-char
+bindkey -s "^o" 'cd ..\n'
 
 # Load completions
 autoload -Uz compinit && compinit -d "$HOME/.cache/zsh/.zcompdump" &> /dev/null
