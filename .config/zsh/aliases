@@ -2,8 +2,7 @@
 if [ -n "$TERMUX_VERSION" ]; then
   alias i="nala update && nala install $1"
   alias rem="nala remove $1"
-  alias s="nala search $1"
-  alias u="nala update && nala upgrade"
+  alias s="nala search $1" alias u="nala update && nala upgrade"
   alias c="clear"
 else
   pacf() {
@@ -31,6 +30,7 @@ alias cfz="nvim ~/.zshrc"
 alias cfa="nvim ~/.config/zsh/aliases"
 alias cfs="nvim ~/.config/zsh/shortcuts"
 alias cfp="nvim ~/files/privateFiles/zsh/private"
+alias svim="sudo -E nvim"
 alias sz="source ~/.zshrc"
 
 # Nvim
