@@ -29,7 +29,6 @@ alias grep="grep --color=auto"
 alias cfz="nvim ~/.zshrc"
 alias cfa="nvim ~/.config/zsh/aliases"
 alias cfs="nvim ~/.config/zsh/shortcuts"
-alias cfp="nvim ~/files/privateFiles/zsh/private"
 alias svim="sudo -E nvim"
 alias sz="source ~/.zshrc"
 

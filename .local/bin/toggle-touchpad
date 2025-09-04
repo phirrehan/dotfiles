@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Variables
+scriptDir="$HOME/.local/bin"
+touchpad='synaptics-tm3276-022'
+status=$(cat $scriptDir/.touchpadStatus.txt 2>/dev/null)
+
+# Functions
+EnableTouchpad() {
+  hyprctl keyword "device[$touchpad]:enabled" true
+  echo "true" >$scriptDir/.touchpadStatus.txt
+}
+
+DisableTouchpad() {
+  hyprctl keyword "device[$touchpad]:enabled" false
+  echo "false" >$scriptDir/.touchpadStatus.txt
+}
+
+Notify() {
+  notify-send -a "Touchpad" "$1"
+}
+
+# If the following function executes, run the script again to toggle correctly
+Default() {
+  echo "true" >$scriptDir/.touchpadStatus.txt
+  EnableTouchpad
+  Notify "Default Behaviour: Touchpad Enabled"
+}
+
+# Start
+[ ! -f "$scriptDir/.touchpadStatus.txt" ] && Default && exit 1
+
+case $status in
+"true") DisableTouchpad && Notify "Touchpad Disabled" ;;
+"false") EnableTouchpad && Notify "Touchpad Enabled" ;;
+*) Default && exit 2 ;;
+esac
