@@ -7,4 +7,3 @@ export PASSWORD_STORE_DIR="$HOME/files/Passwords/store"
 export CLANG_FORMAT_STYLE="$HOME/.config/clang/.clang-format"
 export GIT_CONFIG_GLOBAL="$HOME/.config/git/config"
 export WINEPREFIX="$HOME/.cache/wine"
-

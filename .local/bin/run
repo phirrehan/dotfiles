@@ -36,6 +36,14 @@ CPP() {
   fi
 }
 
+JAVA() {
+  cd "$file_dir"
+  javac "$file_name" && {
+    java "$file_without_ext"
+    rm "$file_without_ext.class"
+  }
+}
+
 TEX() {
   pdflatex -no-shell-escape -halt-on-error -interaction=nonstopmode "$file_path" >/dev/null && {
     $PDFVIEWER "$file_dir/$file_without_ext.pdf"
@@ -65,6 +73,7 @@ for arg in $@; do
   'cpp') CPP ;;
   'py') PY ;;
   'tex') TEX ;;
+  'java') JAVA ;;
   *) echo -e "\e[0;31mInvalid file format. Exiting...\e[0m" && exit 2 ;;
   esac
 done
