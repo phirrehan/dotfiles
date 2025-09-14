@@ -1,9 +1,19 @@
 #!/bin/bash
 
+# Get pdf name
+pdfname=$(
+  curl -sk https://lahore.comsats.edu.pk/student/time-table.aspx |
+    grep -oP 'href="\K[0-9]{8}-[0-9]{4}-classes\.pdf' || {
+    echo "pdfname search failed :("
+    exit 1
+  }
+)
+url="https://lahore.comsats.edu.pk/student/$pdfname"
+
 # Get pdf through curl
-curl -k -o full_timetable.pdf https://lahore.comsats.edu.pk/student/20250913-1600-classes.pdf || {
+curl -k -o full_timetable.pdf "$url" || {
   echo ":( Download failed! Try again."
-  exit 1
+  exit 2
 }
 
 # Get page number
