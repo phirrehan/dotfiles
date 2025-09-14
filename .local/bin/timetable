@@ -10,7 +10,7 @@ curl -k -o full_timetable.pdf https://lahore.comsats.edu.pk/student/20250913-160
 page=$(pdfgrep -n -i 'sp25-bse-a' 'full_timetable.pdf' | cut -d: -f1 | sort -u)
 
 # extract the page from pdf
-pdftk 'full_timetable.pdf' cat 47 output 'timetable.pdf' && rm 'full_timetable.pdf'
+pdftk 'full_timetable.pdf' cat "$page" output 'timetable.pdf' && rm 'full_timetable.pdf'
 
 # move the timetable.pdf file to a convenient location
-mv timetable.pdf ~/files
+mv timetable.pdf ~/Downloads/
