@@ -17,21 +17,21 @@ DisableTouchpad() {
 }
 
 Notify() {
-  notify-send -a "Touchpad" "$1"
+  notify-send "Touchpad" "$1" -a "touchpad script"
 }
 
 # If the following function executes, run the script again to toggle correctly
 Default() {
   echo "true" >$scriptDir/.touchpadStatus.txt
   EnableTouchpad
-  Notify "Default Behaviour: Touchpad Enabled"
+  Notify "Status not found. Fallback to default behaviour"
 }
 
 # Start
 [ ! -f "$scriptDir/.touchpadStatus.txt" ] && Default && exit 1
 
 case $status in
-"true") DisableTouchpad && Notify "Touchpad Disabled" ;;
-"false") EnableTouchpad && Notify "Touchpad Enabled" ;;
+"true") DisableTouchpad && Notify "Successfully Disabled" ;;
+"false") EnableTouchpad && Notify "Successfully Enabled" ;;
 *) Default && exit 2 ;;
 esac

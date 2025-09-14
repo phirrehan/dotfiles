@@ -2,7 +2,7 @@
 
 # functions
 Notify() {
-  notify-send "$1" -a "Cloudflare Warp"
+  notify-send "Cloudflare Warp" "$1" -a "warp-script"
 }
 
 Status() {

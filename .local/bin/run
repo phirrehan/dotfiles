@@ -40,7 +40,7 @@ JAVA() {
   cd "$file_dir"
   javac "$file_name" && {
     java "$file_without_ext"
-    rm "$file_without_ext.class"
+    rm *.class
   }
 }
 
