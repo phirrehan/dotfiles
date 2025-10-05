@@ -1,26 +1,42 @@
 #!/bin/bash
 
+TIMETABLE_DIR="$HOME/files/Comsats/Timetable"
+OLD_PDF_NAME="$(ls $TIMETABLE_DIR)"
+
+# Check internet access
+ping -c 1 google.com &>/dev/null || {
+  echo "Internet is not available."
+  exit 1
+}
+
 # Get pdf name
 pdfname=$(
   curl -sk https://lahore.comsats.edu.pk/student/time-table.aspx |
-    grep -oP 'href="\K[0-9]{8}-[0-9]{4}-classes\.pdf' || {
+    grep -oP 'href="\K.+-classes\.pdf' || {
     echo "pdfname search failed :("
-    exit 1
+    exit 2
   }
 )
+[ "$pdfname" = "$OLD_PDF_NAME" ] && echo "Timetable has not changed." && exit 0 || {
+  echo "Timetable has updated. Deleting old pdf..."
+  rm "$TIMETABLE_DIR/$OLD_PDF_NAME" 2>/dev/null
+}
 url="https://lahore.comsats.edu.pk/student/$pdfname"
 
 # Get pdf through curl
 curl -k -o full_timetable.pdf "$url" || {
   echo ":( Download failed! Try again."
-  exit 2
+  exit 3
 }
 
 # Get page number
 page=$(pdfgrep -n -i 'sp25-bse-a' 'full_timetable.pdf' | cut -d: -f1 | sort -u)
 
 # extract the page from pdf
-pdftk 'full_timetable.pdf' cat "$page" output 'timetable.pdf' && rm 'full_timetable.pdf'
+pdftk 'full_timetable.pdf' cat "$page" output "$pdfname" && rm 'full_timetable.pdf'
 
 # move the timetable.pdf file to a convenient location
-mv timetable.pdf ~/Downloads/
+mv "$pdfname" "$TIMETABLE_DIR"
+echo "Timetable Successfully updated."
+echo "Old Timetable Name: $OLD_PDF_NAME"
+echo "New Timetable Name: $pdfname"
