@@ -1,0 +1,17 @@
+#!/bin/bash
+
+url=$(wl-paste)
+[ -z "$url" ] && exit 1
+selected_folder=$(ls "$HOME/Pictures/olx-testing/" | ~/.local/bin/fzfmenu "Select a directory")
+[ -z "$selected_folder" ] && exit 2
+selected_dir="$HOME/Pictures/olx-testing/$selected_folder"
+max_file_num=$(ls "$selected_dir" | sed -E 's/[^0-9]*([0-9]+)\.jpg/\1/' | sort -n | tail -n 1)
+[ -z "$max_file_num" ] && next_num=0 ||
+  next_num=$(expr $max_file_num + 1)
+
+filename="$selected_folder$next_num.jpg"
+
+# download using curl
+curl "$url" -o 'tmp' && ffmpeg -i tmp "$filename" && rm tmp && mv "$filename" "$selected_dir/$filename" &&
+  notify-send "Download Script" "$filename downloaded successfully :)" ||
+  notify-send "Download Script" "$nextnum download failed :("

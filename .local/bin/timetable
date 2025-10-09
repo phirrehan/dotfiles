@@ -1,7 +1,9 @@
 #!/bin/bash
 
-TIMETABLE_DIR="$HOME/files/Comsats/Timetable"
+TIMETABLE_DIR="$HOME/Downloads"
 OLD_PDF_NAME="$(ls $TIMETABLE_DIR)"
+
+mkdir -p "$TIMETABLE_DIR"
 
 # Check internet access
 ping -c 1 google.com &>/dev/null || {

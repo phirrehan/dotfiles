@@ -16,6 +16,14 @@ function vi-yank-wlclip {
    echo -n "$CUTBUFFER" | wl-copy
 }
 
+function vim_clipboard_file() {
+  local filename
+  filename=$(wl-paste)
+
+  [ -n "$filename" ] && echo "$filename" && nvim "$filename.json"
+}
+
+
 # Command Mode
 bindkey -M vicmd "_" beginning-of-line
 zle -N vi-yank-wlclip
@@ -26,6 +34,7 @@ bindkey "^F" vi-forward-char
 bindkey "^P" history-search-backward
 bindkey "^N" history-search-forward
 bindkey "^?" backward-delete-char
+bindkey -s '^X' 'vim_clipboard_file\n'
 bindkey -s "^o" 'cd ..\n'
 
 # ======= Load Files =======

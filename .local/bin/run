@@ -38,14 +38,14 @@ CPP() {
 
 JAVA() {
   package=$(grep -oP "package \K[^;]+" "$file_path")
-  [ -n "$package" ] && {
-    javac -d . "$package/"*".java"
-    java "$package.$file_without_ext"
-  } || {
-    javac "$file_name"
-    java "$file_without_ext"
-  }
-  rm "$file_dir/"*".class"
+  if [ -n "$package" ]; then
+    javac -d tmp "$package/"*".java" &&
+      java -cp tmp "$package.$file_without_ext"
+  else
+    javac "$file_name" &&
+      java "$file_without_ext" &&
+      rm "$file_dir/"*".class"
+  fi
 }
 
 TEX() {
