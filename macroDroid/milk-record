@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[ -z "$MILK_LIST_DIR" ] && MILK_LIST_DIR="$HOME/files/privateFiles/milk_list"
+[ -z "$MILK_LIST_DIR" ] && MILK_LIST_DIR="$HOME/files/milkList"
 
 # Functions
 manual() {

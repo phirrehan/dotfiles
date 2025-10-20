@@ -33,4 +33,4 @@ alias svim="sudo -E nvim"
 alias sz="source ~/.zshrc"
 
 # Nvim
-alias vim="nvim"
+# alias vim="nvim"
