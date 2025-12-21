@@ -14,7 +14,7 @@ else
     --preview-window=wrap,border-sharp | xargs -ro sudo pacman -Rns
   }
   paruf() {
-    paru -Slq | fzf --multi --preview 'paru -Si {1}' \
+    yay -Slq | fzf --multi --preview 'yay -Si {1}' \
     --preview-window=wrap,border-sharp | xargs -ro paru -S
   }
 
@@ -24,11 +24,12 @@ fi
 alias ls="ls --color=auto"
 alias Ls="ls -A --color=auto"
 alias grep="grep --color=auto"
+alias change="cat ~/.local/state/caelestia/sequences.txt"
 
 # Zsh Config
-alias cfz="nvim ~/.zshrc"
-alias cfa="nvim ~/.config/zsh/aliases"
-alias cfs="nvim ~/.config/zsh/shortcuts"
+alias cfz="cd ~/.config/zsh/ && nvim"
+alias cfh="cd ~/.config/hypr/ && nvim"
+alias cfq="cd ~/.config/caelestia/ && nvim"
 alias svim="sudo -E nvim"
 alias sz="source ~/.zshrc"
 

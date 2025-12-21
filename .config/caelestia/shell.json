@@ -177,8 +177,12 @@
       "shown": 5,
       "specialWorkspaceIcons": [
         {
-          "name": "steam",
-          "icon": "sports_esports"
+          "name": "background",
+          "icon": "pulmonology"
+        },
+        {
+          "name": "notes",
+          "icon": "notes"
         }
       ]
     }
@@ -314,7 +318,7 @@
       "variants": true,
       "wallpapers": true
     },
-    "showOnHover": true,
+    "showOnHover": false,
     "hiddenApps": []
   },
   "lock": {
@@ -330,7 +334,7 @@
   "osd": {
     "enabled": true,
     "enableBrightness": true,
-    "enableMicrophone": false,
+    "enableMicrophone": true,
     "hideDelay": 2000
   },
   "paths": {
@@ -341,7 +345,7 @@
   "services": {
     "audioIncrement": 0.05,
     "maxVolume": 1.0,
-    "defaultPlayer": "Spotify",
+    "defaultPlayer": "Mpd",
     "gpuType": "",
     "playerAliases": [
       { "from": "com.github.th_ch.youtube_music", "to": "YT Music" }

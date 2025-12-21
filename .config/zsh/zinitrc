@@ -19,7 +19,7 @@ zinit light zsh-users/zsh-autosuggestions
 
 # History
 HISTSIZE=5000
-HISTFILE=~/.cache/.zsh_history
+HISTFILE=~/.cache/zsh/history
 SAVEHIST=$HISTSIZE
 HISTDUP=erase
 setopt appendhistory
@@ -31,7 +31,7 @@ setopt hist_ignore_dups
 setopt hist_find_no_dups
 
 # Load completions
-autoload -Uz compinit && compinit -d "$HOME/.cache/zsh/.zcompdump" &> /dev/null
+autoload -Uz compinit && compinit
 
 zinit cdreplay -q
 
