@@ -1,26 +1,23 @@
-local config = require "nvchad.configs.lspconfig"
+require("nvchad.configs.lspconfig").defaults()
 
-local on_attach = config.on_attach
-local capabilities = config.capabilities
-local on_init = config.on_init
+local servers = {
+  "html",
+  "cssls",
+  "ts_ls",
+  "jdtls",
+  "lua_ls",
+  "jsonls",
+  "hyprls",
+  "templ",
+  "htmx",
+  "gopls",
+  "dockerls",
+  "sqls",
+  "pylsp",
+  "tailwind-css-server",
+}
 
-local lspconfig = require "lspconfig"
-
-local servers = { "html", "cssls", "ts_ls", "pyright", "lua_ls", "jsonls", "hyprls", "templ", "jdtls" }
-
--- lsps with default config
-for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    on_attach = on_attach,
-    on_init = on_init,
-    capabilities = capabilities,
-  }
-end
-
-lspconfig.gopls.setup {
-  on_attach = on_attach,
-  on_init = on_init,
-  capabilities = capabilities,
+vim.lsp.config("gopls", {
   settings = {
     gopls = {
       completeUnimported = true,
@@ -30,4 +27,22 @@ lspconfig.gopls.setup {
       },
     },
   },
-}
+})
+
+vim.lsp.config("pylsp", {
+  settings = {
+    pylsp = {
+      signature = {
+        formatter = "null",
+      },
+      plugins = {
+
+        pycodestyle = {
+          enabled = false,
+        },
+      },
+    },
+  },
+})
+
+vim.lsp.enable(servers)

@@ -2,7 +2,6 @@
 
 export CARGO_HOME="$HOME/.local/share/cargo"
 export PATH="$PATH:$HOME/go/bin"
-export PATH="$PATH:$HOME/.local/bin"
 
 
 # ======= KeyBinds =======
@@ -36,6 +35,12 @@ bindkey "^N" history-search-forward
 bindkey "^?" backward-delete-char
 bindkey -s '^X' 'vim_clipboard_file\n'
 bindkey -s "^o" 'cd ..\n'
+
+# Docker function
+function docker-reload(){
+  docker compose down --rmi local && docker compose up
+}
+
 
 # ======= Load Files =======
 

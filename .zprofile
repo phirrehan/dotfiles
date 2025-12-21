@@ -1,4 +1,5 @@
 export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_MUSIC_DIR="$HOME/Music"
 export XDG_CACHE_HOME="$HOME/.cache"
 export EDITOR="nvim"
 export PATH="$PATH:$HOME/.local/bin"

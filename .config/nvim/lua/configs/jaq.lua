@@ -13,7 +13,6 @@ require("jaq-nvim").setup {
       go = "go run '%'",
       -- go = "go run %",
       sh = "sh '%'",
-      java = "$HOME/.local/bin/run '%'"
     },
   },
 
