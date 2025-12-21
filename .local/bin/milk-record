@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[ -z "$MILK_LIST" ] && MILK_LIST="$HOME/files/privateFiles/milk_list"
+[ -z "$MILK_LIST" ] && MILK_LIST="$HOME/files/milkList"
 
 # Functions
 writeNagha() {
@@ -8,16 +8,16 @@ writeNagha() {
 
   file="$MILK_LIST/$1/$recordName"
   [ ! -f "$file" ] && touch $file
-  grep -iq "$naghaDate" "$file" || 
-    echo "Nagha on $naghaDate" >> "$file"
+  grep -iq "$naghaDate" "$file" ||
+    echo "Nagha on $naghaDate" >>"$file"
 }
 writeDouble() {
   # writeDouble() expects 1 argument for name of person.
 
   file="$MILK_LIST/$1/$recordName"
   [ ! -f "$file" ] && touch $file
-  grep -iq "$doubleDate" "$file" || 
-    echo "Double Milk on $doubleDate" >> "$file"
+  grep -iq "$doubleDate" "$file" ||
+    echo "Double Milk on $doubleDate" >>"$file"
 }
 
 # Argument handeling
@@ -42,20 +42,19 @@ echo "2) Tai Ammi"
 echo "3) All"
 read ans
 case $ans in
-  1) abji=true;;
-  2) taiAmmi=true;;
-  3) taiAmmi=true && abji=true;;
-  # empty input
-  '') taiAmmi=true && abji=true;;
-  # default
-  *) echo "Error: invalid input." && exit 4;;
+1) abji=true ;;
+2) taiAmmi=true ;;
+"")
+3) taiAmmi=true && abji=true ;;
+# default
+*) echo "Error: invalid input." && exit 4 ;;
 esac
-  
+
 # Input
 read -p "Enter number of days: " input
 [ -z "$input" ] && input='0'
 [[ "$input" =~ ^-?[0-9]+$ ]] || {
-  echo "Error: invalid input." 
+  echo "Error: invalid input."
   exit 5
 }
 echo ""
@@ -80,4 +79,5 @@ echo "Record:"
 [ "$abji" = "true" ] && echo "Abji's Record" &&
   cat $MILK_LIST/abji/$recordName && echo ""
 
-echo "Enter any key to exit: "; read ans
+echo "Enter any key to exit: "
+read ans

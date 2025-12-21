@@ -10,8 +10,7 @@ manual() {
   echo "For Python: python"
   echo "For LaTeX: texlive\n"
   echo "Usage: $0 /path/to/file1 /path/to/file2 ..."
-  # echo "The --arg option is used to pass arguments to the program's binary."
-  echo "Use --help or -h options to print this manual."
+  # echo "The --arg option is used to pass arguments to the program's binary." echo "Use --help or -h options to print this manual." }
 }
 
 PY() {
@@ -39,8 +38,9 @@ CPP() {
 JAVA() {
   package=$(grep -oP "package \K[^;]+" "$file_path")
   if [ -n "$package" ]; then
-    javac -d tmp "$package/"*".java" &&
-      java -cp tmp "$package.$file_without_ext"
+    javac -d tmp "src/$package/$file_name" &&
+      java -cp 'tmp:assets' "$package.$file_without_ext"
+    rm -rf tmp
   else
     javac "$file_name" &&
       java "$file_without_ext" &&

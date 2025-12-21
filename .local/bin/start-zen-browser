@@ -1,0 +1,5 @@
+#!/bin/sh
+
+prime-run /opt/zen-browser-bin/zen-bin &
+sleep 2.5
+hyprctl dispatch movetoworkspacesilent special:background
