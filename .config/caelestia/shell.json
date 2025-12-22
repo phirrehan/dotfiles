@@ -67,17 +67,17 @@
       "inhibitWhenAudio": true,
       "timeouts": [
         {
-          "timeout": 180,
+          "timeout": 60,
           "idleAction": "lock"
         },
         {
-          "timeout": 300,
+          "timeout": 90,
           "idleAction": "dpms off",
           "returnAction": "dpms on"
         },
         {
-          "timeout": 600,
-          "idleAction": ["systemctl", "suspend-then-hibernate"]
+          "timeout": 180,
+          "idleAction": ["systemctl", "suspend"]
         }
       ]
     }
