@@ -33,10 +33,19 @@
   },
   "general": {
     "apps": {
-      "terminal": ["foot"],
-      "audio": ["pavucontrol"],
-      "playback": ["mpv"],
-      "explorer": ["dolphin", "--select"]
+      "terminal": [
+        "foot"
+      ],
+      "audio": [
+        "pavucontrol"
+      ],
+      "playback": [
+        "mpv"
+      ],
+      "explorer": [
+        "dolphin",
+        "--select"
+      ]
     },
     "battery": {
       "warnLevels": [
@@ -63,21 +72,24 @@
       "criticalLevel": 3
     },
     "idle": {
-      "lockBeforeSleep": true,
+      "lockBeforeSleep": false,
       "inhibitWhenAudio": true,
       "timeouts": [
         {
-          "timeout": 60,
-          "idleAction": "lock"
-        },
-        {
-          "timeout": 90,
+          "timeout": 180,
           "idleAction": "dpms off",
           "returnAction": "dpms on"
         },
         {
-          "timeout": 180,
-          "idleAction": ["systemctl", "suspend"]
+          "timeout": 300,
+          "idleAction": "lock"
+        },
+        {
+          "timeout": 600,
+          "idleAction": [
+            "systemctl",
+            "suspend"
+          ]
         }
       ]
     }
@@ -177,10 +189,6 @@
       "shown": 5,
       "specialWorkspaceIcons": [
         {
-          "name": "background",
-          "icon": "pulmonology"
-        },
-        {
           "name": "notes",
           "icon": "notes"
         }
@@ -204,7 +212,10 @@
         "name": "Calculator",
         "icon": "calculate",
         "description": "Do simple math equations (powered by Qalc)",
-        "command": ["autocomplete", "calc"],
+        "command": [
+          "autocomplete",
+          "calc"
+        ],
         "enabled": true,
         "dangerous": false
       },
@@ -212,7 +223,10 @@
         "name": "Scheme",
         "icon": "palette",
         "description": "Change the current colour scheme",
-        "command": ["autocomplete", "scheme"],
+        "command": [
+          "autocomplete",
+          "scheme"
+        ],
         "enabled": true,
         "dangerous": false
       },
@@ -220,7 +234,10 @@
         "name": "Wallpaper",
         "icon": "image",
         "description": "Change the current wallpaper",
-        "command": ["autocomplete", "wallpaper"],
+        "command": [
+          "autocomplete",
+          "wallpaper"
+        ],
         "enabled": true,
         "dangerous": false
       },
@@ -228,7 +245,10 @@
         "name": "Variant",
         "icon": "colors",
         "description": "Change the current scheme variant",
-        "command": ["autocomplete", "variant"],
+        "command": [
+          "autocomplete",
+          "variant"
+        ],
         "enabled": true,
         "dangerous": false
       },
@@ -236,7 +256,10 @@
         "name": "Transparency",
         "icon": "opacity",
         "description": "Change shell transparency",
-        "command": ["autocomplete", "transparency"],
+        "command": [
+          "autocomplete",
+          "transparency"
+        ],
         "enabled": false,
         "dangerous": false
       },
@@ -244,7 +267,11 @@
         "name": "Random",
         "icon": "casino",
         "description": "Switch to a random wallpaper",
-        "command": ["caelestia", "wallpaper", "-r"],
+        "command": [
+          "caelestia",
+          "wallpaper",
+          "-r"
+        ],
         "enabled": true,
         "dangerous": false
       },
@@ -252,7 +279,10 @@
         "name": "Light",
         "icon": "light_mode",
         "description": "Change the scheme to light mode",
-        "command": ["setMode", "light"],
+        "command": [
+          "setMode",
+          "light"
+        ],
         "enabled": true,
         "dangerous": false
       },
@@ -260,7 +290,10 @@
         "name": "Dark",
         "icon": "dark_mode",
         "description": "Change the scheme to dark mode",
-        "command": ["setMode", "dark"],
+        "command": [
+          "setMode",
+          "dark"
+        ],
         "enabled": true,
         "dangerous": false
       },
@@ -268,7 +301,10 @@
         "name": "Shutdown",
         "icon": "power_settings_new",
         "description": "Shutdown the system",
-        "command": ["systemctl", "poweroff"],
+        "command": [
+          "systemctl",
+          "poweroff"
+        ],
         "enabled": true,
         "dangerous": true
       },
@@ -276,7 +312,10 @@
         "name": "Reboot",
         "icon": "cached",
         "description": "Reboot the system",
-        "command": ["systemctl", "reboot"],
+        "command": [
+          "systemctl",
+          "reboot"
+        ],
         "enabled": true,
         "dangerous": true
       },
@@ -284,7 +323,11 @@
         "name": "Logout",
         "icon": "exit_to_app",
         "description": "Log out of the current session",
-        "command": ["loginctl", "terminate-user", ""],
+        "command": [
+          "loginctl",
+          "terminate-user",
+          ""
+        ],
         "enabled": false,
         "dangerous": true
       },
@@ -292,7 +335,10 @@
         "name": "Lock",
         "icon": "lock",
         "description": "Lock the current session",
-        "command": ["loginctl", "lock-session"],
+        "command": [
+          "loginctl",
+          "lock-session"
+        ],
         "enabled": true,
         "dangerous": false
       },
@@ -300,7 +346,10 @@
         "name": "Sleep",
         "icon": "bedtime",
         "description": "Suspend then hibernate",
-        "command": ["systemctl", "suspend-then-hibernate"],
+        "command": [
+          "systemctl",
+          "suspend-then-hibernate"
+        ],
         "enabled": true,
         "dangerous": false
       }
@@ -322,7 +371,7 @@
     "hiddenApps": []
   },
   "lock": {
-    "recolourLogo": false
+    "recolourLogo": true
   },
   "notifs": {
     "actionOnClick": false,
@@ -348,7 +397,10 @@
     "defaultPlayer": "Mpd",
     "gpuType": "",
     "playerAliases": [
-      { "from": "com.github.th_ch.youtube_music", "to": "YT Music" }
+      {
+        "from": "com.github.th_ch.youtube_music",
+        "to": "YT Music"
+      }
     ],
     "weatherLocation": "Lahore",
     "useFahrenheit": false,
@@ -361,10 +413,23 @@
     "enabled": true,
     "vimKeybinds": true,
     "commands": {
-      "logout": ["loginctl", "terminate-user", ""],
-      "shutdown": ["systemctl", "poweroff"],
-      "hibernate": ["systemctl", "hibernate"],
-      "reboot": ["systemctl", "reboot"]
+      "logout": [
+        "loginctl",
+        "terminate-user",
+        ""
+      ],
+      "shutdown": [
+        "systemctl",
+        "poweroff"
+      ],
+      "hibernate": [
+        "systemctl",
+        "hibernate"
+      ],
+      "reboot": [
+        "systemctl",
+        "reboot"
+      ]
     }
   },
   "sidebar": {
@@ -389,7 +454,9 @@
     },
     "vpn": {
       "enabled": true,
-      "provider": ["warp"]
+      "provider": [
+        "protonvpn"
+      ]
     }
   }
 }
