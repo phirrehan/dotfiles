@@ -100,7 +100,7 @@
     },
     "enabled": true,
     "visualiser": {
-      "blur": false,
+      "blur": true,
       "enabled": false,
       "autoHide": true,
       "rounding": 1,
@@ -186,7 +186,7 @@
       "occupiedLabel": "  ",
       "perMonitorWorkspaces": true,
       "showWindows": false,
-      "shown": 5,
+      "shown": 6,
       "specialWorkspaceIcons": [
         {
           "name": "notes",
