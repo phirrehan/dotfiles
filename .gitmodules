@@ -10,3 +10,6 @@
 [submodule ".config/tmux/plugins/tmux-gruvbox"]
 	path = .config/tmux/plugins/tmux-gruvbox
 	url = https://github.com/egel/tmux-gruvbox.git
+[submodule ".config/tmux/plugins/tmux-yank"]
+	path = .config/tmux/plugins/tmux-yank
+	url = https://github.com/tmux-plugins/tmux-yank
