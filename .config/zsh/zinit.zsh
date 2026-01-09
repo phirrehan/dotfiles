@@ -46,4 +46,3 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 
 # Shell Integrations
 eval "$(fzf --zsh)"
-
