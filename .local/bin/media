@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# This is a wrapper script for playerctl that only controls a specific media player stored in ~/.local/bin/.player.txt
+# This is a wrapper script for playerctl that only controls a specific media player stored in $HOME/.cache/.player.txt
 # Functions
 help() {
   printf "Usage: %s [Option]\n\nOptions:\nhelp: print this manual.\nplay-pause: toggle the media playing.\nvolume [0-1]<+/-/nothing>\nnext: play next media.\nprevious: play previous media.\nloop: toggle loop state.\n" "$command"
@@ -37,12 +37,12 @@ toggleloop() {
 
 choose() {
   chosen=$(playerctl -l | fuzzel --dmenu "Choose Player")
-  echo $chosen >~/.local/bin/.player.txt
+  printf "$chosen" >$HOME/.cache/.player.txt 2>/dev/null
 }
 
 # Variable Initialization
 topPlayer=$(playerctl -l | head -n 1)
-chosen=$(cat ~/.local/bin/.player.txt)
+chosen=$(cat $HOME/.cache/.player.txt)
 [ -n "$chosen" ] && args="--player $chosen"
 command="$0"
 

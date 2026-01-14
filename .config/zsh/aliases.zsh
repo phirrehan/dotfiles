@@ -1,12 +1,3 @@
-if [ -n "$TERMUX_VERSION" ]; then
-  # Termux Aliases
-  alias i="nala update && nala install $1"
-  alias rem="nala remove $1"
-  alias s="nala search $1"
-  alias u="nala update && nala upgrade"
-  alias c="clear"
-fi
-
 # System
 alias ls="ls --color=auto"
 alias Ls="ls -A --color=auto"

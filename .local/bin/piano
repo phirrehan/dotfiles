@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd /home/rehan/files/Piano
-make 2>/dev/null && ./main
+cd "$HOME/files/github/Piano"
+cmake -B build && cmake --build build && ./build/bin/main

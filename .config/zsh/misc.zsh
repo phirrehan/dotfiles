@@ -28,6 +28,7 @@ _auto_venv() {
     deactivate
   fi
 }
+
 chpwd() {
   _auto_venv
 }

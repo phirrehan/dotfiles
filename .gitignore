@@ -1,4 +1,2 @@
-.config/zsh/.zcompdump
+.zcompdump
 .local/bin/subliminal
-.local/bin/.touchpadStatus.txt
-.local/bin/.player.txt
