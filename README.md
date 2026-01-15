@@ -8,20 +8,20 @@ This repository contains the dotfiles for hyprland desktop. It uses quickshell(c
 
 Ensure you have git and stow installed:
 
-```
+```zsh
 sudo pacman -Sy
 sudo pacman -S git stow --needed
 ```
 
 These dotfiles contain configurations for `zsh`, `neovim`, `tmux`, `foot`, `fuzzel`, `mpv`, `mpd`, `rmpc`, `hyprland`, and `quickshell-git`. Install these applications for using my dotfiles:
 
-```
-sudo pacman -S zsh neovim tmux foot fuzzel mpd mpc mpd-mpris rmpc hyprland --needed
+```zsh
+sudo pacman -S zsh neovim tmux foot fuzzel mpd mpc mpd-mpris rmpc hyprland hyprsunset hyprpicker --needed
 ```
 
 Use AUR helper yay/paru for installing the `quickshell-git` package.
 
-```
+```zsh
 paru -S quickshell-git
 ```
 
@@ -29,7 +29,7 @@ paru -S quickshell-git
 
 Clone this repository to your `$HOME` directory
 
-```
+```zsh
 cd ~
 git clone --recurse-submodules https://github.com/phirrehan/dotfiles.git
 ```
@@ -40,7 +40,7 @@ Use stow to create symbolic links from `$HOME/dotfiles/` to `$HOME/` in exactly 
 
 > Note: Any existing config files that conflict with the config files in `dotfiles`, should be backed up and removed to avoid errors.
 
-```
+```zsh
 cd dotfiles
 stow .
 ```
@@ -51,7 +51,7 @@ stow .
 
 Change your default shell to zsh by using:
 
-```
+```zsh
 chsh -s $(which zsh)
 ```
 
@@ -59,7 +59,7 @@ chsh -s $(which zsh)
 
 Use the following command to source .zshrc file
 
-```
+```zsh
 exec ~/.zshrc
 ```
 
@@ -69,7 +69,7 @@ This will install zinit(plugin manager for zsh) which will further install vario
 
 This font is useful for nvim and tmux configurations. If you do not need those, you can skip this step. Install a nerd font of your choice. I personally like to use `JetBrainsMono` Nerd font.
 
-```
+```zsh
 sudo pacman -S ttf-jetbrains-mono-nerd
 ```
 
@@ -77,7 +77,7 @@ sudo pacman -S ttf-jetbrains-mono-nerd
 
 While inside a tmux environment, run the following command
 
-```
+```zsh
 tmux source ~/.config/tmux/tmux.conf
 ```
 
@@ -87,7 +87,29 @@ Press `prefix` + <kbd>I</kbd> (capital i, as in **I**nstall) to fetch the plugin
 
 # Neovim Setup
 
-Neovim will lazy load everything when it is opened for the first time. It may take some time in the first launch.
+Ensure you have the following packages installed before running runing Neovim for the first time:
+
+- 7zip
+- unrar
+- unzip
+- python
+- go
+- rust
+- deno
+
+```zsh
+sudo pacman -S 7zip unrar unzip python go rust deno
+```
+
+Neovim will lazy load everything when it is opened for the first time. It may take some time on the first launch.
+
+# Mpv Setup
+
+The only extra thing that `mpv` needs is a font. It can be installed via AUR helper as follows:
+
+```zsh
+paru -S ttf-material-design-iconic-font
+```
 
 # Fuzzel Setup
 
@@ -95,7 +117,7 @@ Fetch the `fuzzel.ini` file from [caelestia-dots/fuzzel](https://github.com/cael
 
 This can be done by the following commands:
 
-```
+```zsh
 mkdir -p ~/.config/fuzzel
 curl -o "$HOME/.config/fuzzel/fuzzel.ini" "https://raw.githubusercontent.com/caelestia-dots/fuzzel/main/fuzzel.ini"
 ```
