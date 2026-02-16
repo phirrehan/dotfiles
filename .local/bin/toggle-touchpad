@@ -6,32 +6,38 @@ touchpad='synaptics-tm3276-022'
 status=$(cat $HOME/.cache/.touchpadStatus.txt 2>/dev/null)
 
 # Functions
-EnableTouchpad() {
+function EnableTouchpad() {
   hyprctl keyword "device[$touchpad]:enabled" true
   printf "true" >$HOME/.cache/.touchpadStatus.txt
 }
 
-DisableTouchpad() {
+function DisableTouchpad() {
   hyprctl keyword "device[$touchpad]:enabled" false
   printf "false" >$HOME/.cache/.touchpadStatus.txt
 }
 
-Notify() {
-  notify-send "Touchpad" "$1" -a "touchpad script"
+function Toast() {
+  caelestia shell toaster info "Touchpad" "$1" "$2"
 }
 
-# If the following function executes, run the script again to toggle correctly
+function Notify() {
+  case "$1" in
+  "enable") Toast "Touchpad Enabled" "touchpad_mouse" ;;
+  "disable") Toast "Touchpad Disabled" "touchpad_mouse_off" ;;
+  "fallback") Toast "Status not found. Fallback to enabling touchpad" "touchpad_mouse" ;;
+  esac
+}
+
+# If the following function executes, run the script again to work properly
 Default() {
   printf "true" >$HOME/.cache/.touchpadStatus.txt
   EnableTouchpad
-  Notify "Status not found. Fallback to default behaviour"
+  Notify fallback
 }
 
 # Start
-[ ! -f "$HOME/.cache/.touchpadStatus.txt" ] && Default && exit 1
-
 case $status in
-"true") DisableTouchpad && Notify "Successfully Disabled" ;;
-"false") EnableTouchpad && Notify "Successfully Enabled" ;;
-*) Default && exit 2 ;;
+"true") DisableTouchpad && Notify disable ;;
+"false") EnableTouchpad && Notify enable ;;
+*) Default && exit 1 ;;
 esac
