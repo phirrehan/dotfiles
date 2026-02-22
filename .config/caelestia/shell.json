@@ -21,6 +21,8 @@
       }
     },
     "anim": {
+      "mediaGifSpeedAdjustment": 300,
+      "sessionGifSpeed": 0.7,
       "durations": {
         "scale": 1
       }
@@ -217,7 +219,8 @@
         "enabled": true,
         "id": "power"
       }
-    ]
+    ],
+    "excludedScreens": []
   },
   "border": {
     "thickness": 5,
@@ -422,6 +425,19 @@
       },
       {
         "command": [
+          "caelestia",
+          "shell",
+          "controlCenter",
+          "open"
+        ],
+        "dangerous": false,
+        "description": "Configure the shell",
+        "enabled": true,
+        "icon": "settings",
+        "name": "Settings"
+      },
+      {
+        "command": [
           "/home/rehan/.local/bin/toggle-caelestia",
           "visualiser"
         ],
@@ -517,13 +533,14 @@
       "numLockChanged": false,
       "kbLayoutChanged": true,
       "vpnChanged": true,
-      "nowPlaying": false
+      "nowPlaying": true
     },
     "vpn": {
       "enabled": false,
       "provider": [
         {
           "displayName": "Wireguard (Your VPN)",
+          "enabled": true,
           "interface": "your-connection-name",
           "name": "wireguard"
         }
