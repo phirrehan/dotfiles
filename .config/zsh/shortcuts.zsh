@@ -15,3 +15,4 @@ hash -d hy=~/.config/hypr
 hash -d github=~/files/github
 hash -d notes=~/files/notes
 hash -d uni=~/files/Comsats
+hash -d hopz=~/files/practice/sfml/hopzbie_tutorial
