@@ -24,7 +24,7 @@
       "mediaGifSpeedAdjustment": 300,
       "sessionGifSpeed": 0.7,
       "durations": {
-        "scale": 1
+        "scale": 0.6163035599226804
       }
     },
     "transparency": {
@@ -35,6 +35,7 @@
   },
   "general": {
     "logo": "",
+    "excludedScreens": [],
     "apps": {
       "terminal": [
         "foot"
@@ -46,8 +47,7 @@
         "mpv"
       ],
       "explorer": [
-        "dolphin",
-        "--select"
+        "dolphin"
       ]
     },
     "idle": {
@@ -66,7 +66,7 @@
         {
           "idleAction": [
             "systemctl",
-            "suspend"
+            "suspend-then-hibernate"
           ],
           "timeout": 600
         }
@@ -99,26 +99,27 @@
   },
   "background": {
     "enabled": true,
+    "wallpaperEnabled": true,
     "desktopClock": {
       "enabled": true,
-      "scale": 0.7,
+      "scale": 1,
       "position": "bottom-right",
       "invertColors": false,
       "background": {
         "enabled": false,
-        "opacity": 0.5,
+        "opacity": 0.7,
         "blur": true
       },
       "shadow": {
         "enabled": true,
         "opacity": 0.7,
-        "blur": 0.3
+        "blur": 0.4
       }
     },
     "visualiser": {
       "enabled": false,
       "autoHide": true,
-      "blur": true,
+      "blur": false,
       "rounding": 1,
       "spacing": 1
     }
@@ -143,6 +144,7 @@
       "occupiedBg": false,
       "showWindows": false,
       "showWindowsOnSpecialWorkspaces": false,
+      "maxWindowIcons": 0,
       "activeTrail": false,
       "perMonitorWorkspaces": true,
       "label": "  ",
@@ -154,13 +156,20 @@
           "icon": "notes",
           "name": "notes"
         }
-      ]
+      ],
+      "windowIcons": []
+    },
+    "activeWindow": {
+      "compact": true,
+      "inverted": false,
+      "showOnHover": true
     },
     "tray": {
       "background": true,
       "recolour": false,
       "compact": true,
-      "iconSubs": []
+      "iconSubs": [],
+      "hiddenIcons": []
     },
     "status": {
       "showAudio": false,
@@ -173,14 +182,9 @@
       "showLockStatus": false
     },
     "clock": {
+      "background": true,
+      "showDate": false,
       "showIcon": false
-    },
-    "sizes": {
-      "innerWidth": 40,
-      "windowPreviewSize": 400,
-      "trayMenuWidth": 300,
-      "batteryWidth": 250,
-      "networkWidth": 320
     },
     "entries": [
       {
@@ -220,7 +224,9 @@
         "id": "power"
       }
     ],
-    "excludedScreens": []
+    "excludedScreens": [
+      ""
+    ]
   },
   "border": {
     "thickness": 5,
@@ -230,29 +236,18 @@
     "enabled": true,
     "showOnHover": true,
     "mediaUpdateInterval": 500,
+    "resourceUpdateInterval": 1000,
     "dragThreshold": 50,
-    "sizes": {
-      "tabIndicatorHeight": 3,
-      "tabIndicatorSpacing": 5,
-      "infoWidth": 200,
-      "infoIconSize": 25,
-      "dateTimeWidth": 110,
-      "mediaWidth": 200,
-      "mediaProgressSweep": 180,
-      "mediaProgressThickness": 8,
-      "resourceProgessThickness": 10,
-      "weatherWidth": 250,
-      "mediaCoverArtSize": 150,
-      "mediaVisualiserSize": 80,
-      "resourceSize": 200
+    "performance": {
+      "showBattery": true,
+      "showGpu": true,
+      "showCpu": true,
+      "showMemory": true,
+      "showStorage": true,
+      "showNetwork": true
     }
   },
-  "controlCenter": {
-    "sizes": {
-      "heightMult": 0.7,
-      "ratio": 1.7777777777777777
-    }
-  },
+  "controlCenter": {},
   "launcher": {
     "enabled": true,
     "showOnHover": false,
@@ -263,6 +258,9 @@
     "enableDangerousActions": true,
     "dragThreshold": 50,
     "vimKeybinds": true,
+    "favouriteApps": [
+      "sklauncher"
+    ],
     "hiddenApps": [],
     "useFuzzy": {
       "apps": true,
@@ -270,12 +268,6 @@
       "schemes": true,
       "variants": true,
       "wallpapers": true
-    },
-    "sizes": {
-      "itemWidth": 600,
-      "itemHeight": 57,
-      "wallpaperWidth": 280,
-      "wallpaperHeight": 200
     },
     "actions": [
       {
@@ -397,7 +389,7 @@
         ],
         "dangerous": true,
         "description": "Log out of the current session",
-        "enabled": false,
+        "enabled": true,
         "icon": "exit_to_app",
         "name": "Logout"
       },
@@ -451,31 +443,30 @@
   },
   "notifs": {
     "expire": true,
+    "fullscreen": "on",
     "defaultExpireTimeout": 5000,
     "clearThreshold": 0.3,
     "expandThreshold": 20,
-    "actionOnClick": false,
+    "actionOnClick": true,
     "groupPreviewNum": 3,
-    "sizes": {
-      "width": 400,
-      "image": 41,
-      "badge": 20
-    }
+    "openExpanded": false
   },
   "osd": {
     "enabled": true,
     "hideDelay": 2000,
     "enableBrightness": true,
-    "enableMicrophone": true,
-    "sizes": {
-      "sliderWidth": 30,
-      "sliderHeight": 150
-    }
+    "enableMicrophone": true
   },
   "session": {
     "enabled": true,
     "dragThreshold": 30,
     "vimKeybinds": true,
+    "icons": {
+      "logout": "logout",
+      "shutdown": "power_settings_new",
+      "hibernate": "downloading",
+      "reboot": "cached"
+    },
     "commands": {
       "logout": [
         "loginctl",
@@ -494,36 +485,21 @@
         "systemctl",
         "reboot"
       ]
-    },
-    "sizes": {
-      "button": 80
     }
   },
-  "winfo": {
-    "sizes": {
-      "heightMult": 0.7,
-      "detailsWidth": 500
-    }
-  },
+  "winfo": {},
   "lock": {
-    "recolourLogo": true,
+    "recolourLogo": false,
     "enableFprint": true,
     "maxFprintTries": 3,
-    "sizes": {
-      "heightMult": 0.7,
-      "ratio": 1.7777777777777777,
-      "centerWidth": 600
-    }
+    "hideNotifs": true
   },
   "utilities": {
     "enabled": true,
     "maxToasts": 4,
-    "sizes": {
-      "width": 430,
-      "toastWidth": 430
-    },
     "toasts": {
       "configLoaded": true,
+      "fullscreen": "off",
       "chargingChanged": true,
       "gameModeChanged": true,
       "dndChanged": true,
@@ -536,28 +512,55 @@
       "nowPlaying": true
     },
     "vpn": {
-      "enabled": false,
+      "enabled": true,
       "provider": [
         {
           "displayName": "Wireguard (Your VPN)",
-          "enabled": true,
-          "interface": "your-connection-name",
+          "enabled": false,
           "name": "wireguard"
         }
       ]
-    }
+    },
+    "quickToggles": [
+      {
+        "enabled": true,
+        "id": "wifi"
+      },
+      {
+        "enabled": true,
+        "id": "bluetooth"
+      },
+      {
+        "enabled": true,
+        "id": "mic"
+      },
+      {
+        "enabled": true,
+        "id": "settings"
+      },
+      {
+        "enabled": true,
+        "id": "gameMode"
+      },
+      {
+        "enabled": true,
+        "id": "dnd"
+      },
+      {
+        "enabled": false,
+        "id": "vpn"
+      }
+    ]
   },
   "sidebar": {
     "enabled": true,
-    "dragThreshold": 80,
-    "sizes": {
-      "width": 430
-    }
+    "dragThreshold": 80
   },
   "services": {
-    "weatherLocation": "Lahore",
+    "weatherLocation": "",
     "useFahrenheit": false,
-    "useTwelveHourClock": false,
+    "useFahrenheitPerformance": false,
+    "useTwelveHourClock": true,
     "gpuType": "",
     "visualiserBars": 60,
     "audioIncrement": 0.05,
@@ -570,11 +573,16 @@
         "from": "com.github.th_ch.youtube_music",
         "to": "YT Music"
       }
-    ]
+    ],
+    "showLyrics": true,
+    "lyricsBackend": "Auto"
   },
   "paths": {
     "wallpaperDir": "~/Pictures/Wallpapers",
-    "sessionGif": "root:/assets/kurukuru.gif",
-    "mediaGif": "root:/assets/bongocat.gif"
+    "lyricsDir": "~/Music/lyrics",
+    "sessionGif": "root:/assets/002.gif",
+    "mediaGif": "root:/assets/002.gif",
+    "noNotifsPic": "root:/assets/dino.png",
+    "lockNoNotifsPic": "root:/assets/dino.png"
   }
 }
