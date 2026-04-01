@@ -2,7 +2,6 @@
 
 # Run fzfmenu.sh to get the selected directory
 selected_dir=$(fd --type directory --hidden . ~ | fuzzel --dmenu)
-echo "selected_dir: $selected_dir"
 [ -z "$selected_dir" ] && exit 1
 
 # Get the action to perform
