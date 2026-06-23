@@ -1,4 +1,5 @@
 local fn = require("hyprland.functions")
+local fn1 = require("hypr.functions")
 local vars = require("variables")
 
 -- variables
@@ -7,17 +8,6 @@ local color = "cat " .. home .. "/.local/state/caelestia/sequences.txt"
 local scriptDir = home .. "/.local/bin"
 local footConf = home .. "/.config/foot/footfzf.ini"
 local kbCustomBinds = "CTRL + ALT + semicolon"
-
--- functions
-local function move_by_screen(x, y)
-	local screen = hl.get_active_monitor()
-	if screen and type(screen.width) == "number" and type(screen.height) == "number" then
-		local w = (screen.width * (x / 100)) or 0
-		local h = (screen.height * (y / 100)) or 0
-
-		return { x = w, y = h, relative = true }
-	end
-end
 
 -- changing from caelestia to custom keymap
 hl.bind(kbCustomBinds, hl.dsp.exec_cmd("caelestia shell toaster info KeyBinds 'Custom KeyBinds' Keyboard"))
@@ -135,14 +125,14 @@ hl.define_submap("custom", function()
 		hl.bind("l", hl.dsp.window.resize(fn.resize_active_window(5, 0)), { repeating = true })
 		hl.bind("k", hl.dsp.window.resize(fn.resize_active_window(0, 5)), { repeating = true })
 		hl.bind("j", hl.dsp.window.resize(fn.resize_active_window(0, -5)), { repeating = true })
-		-- hl.bind("SHIFT + left", hl.dsp.window.move(move_by_screen(-5, 0)), { repeating = true })
-		-- hl.bind("SHIFT + right", hl.dsp.window.move(move_by_screen(5, 0)), { repeating = true })
-		-- hl.bind("SHIFT + up", hl.dsp.window.move(move_by_screen(0, -5)), { repeating = true })
-		-- hl.bind("SHIFT + down", hl.dsp.window.move(move_by_screen(0, 5)), { repeating = true })
-		-- hl.bind("SHIFT + h", hl.dsp.window.move(move_by_screen(-5, 0)), { repeating = true })
-		-- hl.bind("SHIFT + l", hl.dsp.window.move(move_by_screen(5, 0)), { repeating = true })
-		-- hl.bind("SHIFT + k", hl.dsp.window.move(move_by_screen(0, -5)), { repeating = true })
-		-- hl.bind("SHIFT + j", hl.dsp.window.move(move_by_screen(0, 5)), { repeating = true })
+		hl.bind("SHIFT + left", hl.dsp.window.move(fn1.move_by_screen(-5, 0)), { repeating = true })
+		hl.bind("SHIFT + right", hl.dsp.window.move(fn1.move_by_screen(5, 0)), { repeating = true })
+		hl.bind("SHIFT + up", hl.dsp.window.move(fn1.move_by_screen(0, -5)), { repeating = true })
+		hl.bind("SHIFT + down", hl.dsp.window.move(fn1.move_by_screen(0, 5)), { repeating = true })
+		hl.bind("SHIFT + h", hl.dsp.window.move(fn1.move_by_screen(-5, 0)), { repeating = true })
+		hl.bind("SHIFT + l", hl.dsp.window.move(fn1.move_by_screen(5, 0)), { repeating = true })
+		hl.bind("SHIFT + k", hl.dsp.window.move(fn1.move_by_screen(0, -5)), { repeating = true })
+		hl.bind("SHIFT + j", hl.dsp.window.move(fn1.move_by_screen(0, 5)), { repeating = true })
 		hl.bind("escape", hl.dsp.exec_cmd("caelestia shell toaster info KeyBinds 'Custom KeyBinds' Keyboard"))
 		hl.bind("escape", hl.dsp.submap("custom"))
 	end)
