@@ -1,0 +1,6 @@
+hl.on("hyprland.start", function()
+	hl.exec_cmd("hyprsunset")
+	hl.exec_cmd("spotify", { workspace = "special:music silent" })
+	hl.exec_cmd("bluetoothctl power off")
+	hl.exec_cmd("sleep 1; hyprctl dispatch 'hl.dsp.submap(\"custom\")'")
+end)
