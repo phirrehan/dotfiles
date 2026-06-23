@@ -1,4 +1,4 @@
-require("nvim-treesitter.configs").setup {
+require("nvim-treesitter.config").setup {
   opts = {
     ensure_installed = {
       "vim",

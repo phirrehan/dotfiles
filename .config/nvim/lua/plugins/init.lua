@@ -29,6 +29,7 @@ return {
   },
   {
     "nvim-tree/nvim-tree.lua",
+    build = ":TSUpdate",
     config = function()
       require "configs.nvimtree"
     end,
