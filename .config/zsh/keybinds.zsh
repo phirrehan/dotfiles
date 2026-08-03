@@ -10,7 +10,6 @@ zle -N copy-command
 autoload -Uz edit-command-line
 zle -N edit-command-line
 
-
 # ======= KeyBinds =======
 # Set Emacs Mode
 bindkey -e

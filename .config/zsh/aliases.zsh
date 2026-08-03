@@ -1,8 +1,8 @@
 # System
-alias ls="ls --color=auto"
-alias Ls="ls -A --color=auto"
+alias ls="eza --icons --group-directories-first"
+alias Ls="eza -A --icons --group-directories-first"
 alias grep="grep --color=auto"
-alias change="cat ~/.local/state/caelestia/sequences.txt"
+alias tmux="$HOME/.local/bin/zsh_color reset; tmux"
 
 # Zsh Config
 alias svim="sudo -E nvim"
