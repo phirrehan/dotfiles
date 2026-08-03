@@ -1,17 +1,28 @@
-local fn = require("hyprland.functions")
-local fn1 = require("hypr.functions")
+local fn = require("utils.functions")
 local vars = require("variables")
+
+-- helper functions
+local function change_keymap(keymap, message)
+	return function()
+		hl.dispatch(hl.dsp.submap(keymap))
+		hl.dispatch(hl.dsp.exec_cmd("caelestia shell toaster info KeyBinds " .. message .. " Keyboard"))
+	end
+end
+local function exec_and_return(cmd)
+	return function()
+		hl.dispatch(hl.dsp.exec_cmd(cmd))
+		change_keymap("custom", "'Custom Keybinds'")()
+	end
+end
 
 -- variables
 local home = os.getenv("HOME")
 local color = "cat " .. home .. "/.local/state/caelestia/sequences.txt"
 local scriptDir = home .. "/.local/bin"
-local footConf = home .. "/.config/foot/footfzf.ini"
-local kbCustomBinds = "CTRL + ALT + semicolon"
+local footConf = home .. "/.config/foot/fzf.ini"
 
 -- changing from caelestia to custom keymap
-hl.bind(kbCustomBinds, hl.dsp.exec_cmd("caelestia shell toaster info KeyBinds 'Custom KeyBinds' Keyboard"))
-hl.bind(kbCustomBinds, hl.dsp.submap("custom"))
+hl.bind("CTRL + ALT + semicolon", change_keymap("custom", "'Custom Keybinds'"))
 
 -- defining custom submap
 hl.define_submap("custom", function()
@@ -28,6 +39,7 @@ hl.define_submap("custom", function()
 	hl.bind("CTRL + ALT + delete", hl.dsp.global("caelestia:session"))
 	hl.bind("SUPER + slash", hl.dsp.global("caelestia:lock"))
 	hl.bind("SUPER + SHIFT + slash", hl.dsp.exec_cmd(vars.sleepGestureCmd), { locked = true })
+	hl.bind("CTRL + ALT + t", hl.dsp.exec_cmd(scriptDir .. "/zsh_color toggle"))
 
 	-- brightness & temperature
 	hl.bind("XF86MonBrightnessUp", hl.dsp.global("caelestia:brightnessUp"), { locked = true })
@@ -112,31 +124,6 @@ hl.define_submap("custom", function()
 	hl.bind("ALT + tab", hl.dsp.group.next(), { repeating = true })
 	hl.bind("ALT + SHIFT + tab", hl.dsp.group.prev(), { repeating = true })
 
-	-- resize submap
-	hl.bind("SUPER + SHIFT + r", hl.dsp.exec_cmd("caelestia shell toaster info KeyBinds 'Resize KeyBinds' Keyboard"))
-	hl.bind("SUPER + SHIFT + r", hl.dsp.submap("resize"))
-	hl.define_submap("resize", function()
-		hl.bind("f", hl.dsp.window.float({}))
-		hl.bind("left", hl.dsp.window.resize(fn.resize_active_window(-5, 0)), { repeating = true })
-		hl.bind("right", hl.dsp.window.resize(fn.resize_active_window(5, 0)), { repeating = true })
-		hl.bind("up", hl.dsp.window.resize(fn.resize_active_window(0, 5)), { repeating = true })
-		hl.bind("down", hl.dsp.window.resize(fn.resize_active_window(0, -5)), { repeating = true })
-		hl.bind("h", hl.dsp.window.resize(fn.resize_active_window(-5, 0)), { repeating = true })
-		hl.bind("l", hl.dsp.window.resize(fn.resize_active_window(5, 0)), { repeating = true })
-		hl.bind("k", hl.dsp.window.resize(fn.resize_active_window(0, 5)), { repeating = true })
-		hl.bind("j", hl.dsp.window.resize(fn.resize_active_window(0, -5)), { repeating = true })
-		hl.bind("SHIFT + left", hl.dsp.window.move(fn1.move_by_screen(-5, 0)), { repeating = true })
-		hl.bind("SHIFT + right", hl.dsp.window.move(fn1.move_by_screen(5, 0)), { repeating = true })
-		hl.bind("SHIFT + up", hl.dsp.window.move(fn1.move_by_screen(0, -5)), { repeating = true })
-		hl.bind("SHIFT + down", hl.dsp.window.move(fn1.move_by_screen(0, 5)), { repeating = true })
-		hl.bind("SHIFT + h", hl.dsp.window.move(fn1.move_by_screen(-5, 0)), { repeating = true })
-		hl.bind("SHIFT + l", hl.dsp.window.move(fn1.move_by_screen(5, 0)), { repeating = true })
-		hl.bind("SHIFT + k", hl.dsp.window.move(fn1.move_by_screen(0, -5)), { repeating = true })
-		hl.bind("SHIFT + j", hl.dsp.window.move(fn1.move_by_screen(0, 5)), { repeating = true })
-		hl.bind("escape", hl.dsp.exec_cmd("caelestia shell toaster info KeyBinds 'Custom KeyBinds' Keyboard"))
-		hl.bind("escape", hl.dsp.submap("custom"))
-	end)
-
 	-- special workspace
 	hl.bind("SUPER + s", hl.dsp.workspace.toggle_special("special"))
 	hl.bind("SUPER + m", hl.dsp.workspace.toggle_special("music"))
@@ -149,14 +136,25 @@ hl.define_submap("custom", function()
 	hl.bind("SUPER + SHIFT + t", hl.dsp.window.move({ workspace = "todo", follow = false }))
 	hl.bind("SUPER + SHIFT + n", hl.dsp.window.move({ workspace = "notes", follow = false }))
 
+	-- pacman submap
+	hl.bind("CTRL + ALT + P", change_keymap("pacman", "'Pacman Keybinds'"))
+	hl.define_submap("pacman", function()
+		hl.bind("i", exec_and_return(scriptDir .. "/pacman-helper install"))
+		hl.bind("r", exec_and_return(scriptDir .. "/pacman-helper remove"))
+		hl.bind("u", exec_and_return(scriptDir .. "/pacman-helper update"))
+		hl.bind("a", exec_and_return(scriptDir .. "/pacman-helper aur"))
+		hl.bind("SHIFT + u", exec_and_return(scriptDir .. "/pacman-helper aur-update"))
+		hl.bind("escape", change_keymap("custom", "'Custom Keybinds'"))
+	end)
+
 	-- apps
 	hl.bind("SUPER + return", hl.dsp.exec_cmd(vars.terminal))
 	hl.bind("SUPER + b", hl.dsp.exec_cmd(vars.browser))
-	hl.bind("SUPER + SHIFT + b", hl.dsp.exec_cmd(vars.browser .. "--private-window"))
+	hl.bind("SUPER + SHIFT + b", hl.dsp.exec_cmd(vars.browser .. " --private-window"))
 	hl.bind("SUPER + e", hl.dsp.exec_cmd(vars.fileExplorer))
-	hl.bind("SUPER + SHIFT + e", hl.dsp.exec_cmd("foot -e sh -c '" .. color .. "; yazi'"))
+	hl.bind("SUPER + SHIFT + e", hl.dsp.exec_cmd("foot -e sh -c '" .. color .. ";yazi'"))
 	hl.bind("SUPER + ALT + v", hl.dsp.exec_cmd(vars.audioSettings))
-	hl.bind("CTRL + SHIFT + escape", hl.dsp.exec_cmd("foot -a 'btop' -e sh -c '" .. color .. "; btop'"))
+	hl.bind("CTRL + SHIFT + escape", hl.dsp.exec_cmd("foot -a 'btop' -e sh -c '" .. color .. ";btop'"))
 
 	-- utilities
 	hl.bind("print", hl.dsp.exec_cmd("caelestia screenshot"), { locked = true })
@@ -212,10 +210,9 @@ hl.define_submap("custom", function()
 	hl.bind("SUPER + ALT + p", hl.dsp.exec_cmd(scriptDir .. "/passget"))
 	hl.bind(
 		"SUPER + CTRL + p",
-		hl.dsp.exec_cmd("foot -a script -c " .. footConf .. " -e sh -c " .. scriptDir .. "/passgen")
+		hl.dsp.exec_cmd("foot -a foot-fzf -c " .. footConf .. " -e sh -c " .. scriptDir .. "/passgen")
 	)
 
 	-- changing from custom to caelestia keymap
-	hl.bind(kbCustomBinds, hl.dsp.exec_cmd("caelestia shell toaster info KeyBinds 'Caelestia KeyBinds' Keyboard"))
-	hl.bind(kbCustomBinds, hl.dsp.submap("reset"))
+	hl.bind("CTRL + ALT + semicolon", change_keymap("reset", "'Caelestia Keybinds'"))
 end)

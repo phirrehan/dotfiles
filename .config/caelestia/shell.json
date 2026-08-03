@@ -253,7 +253,7 @@
                 "id": "tray"
             },
             {
-                "enabled": true,
+                "enabled": false,
                 "id": "clock"
             },
             {
@@ -411,7 +411,7 @@
                 }
             ]
         },
-        "logo": "caelestia",
+        "logo": "",
         "mediaGifSpeedAdjustment": 300,
         "sessionGifSpeed": 0.7,
         "showOverFullscreen": false
@@ -617,7 +617,7 @@
         "defaultExpireTimeout": 5000,
         "expandThreshold": 20,
         "expire": true,
-        "fullscreen": "on",
+        "fullscreen": "off",
         "fullscreenExpireTimeout": 2000,
         "groupPreviewNum": 3,
         "openExpanded": false
@@ -634,7 +634,7 @@
         "mediaGif": "root:/assets/bongocat.gif",
         "noNotifsPic": "root:/assets/dino.png",
         "sessionGif": "root:/assets/kurukuru.gif",
-        "wallpaperDir": "~/Pictures/Wallpapers"
+        "wallpaperDir": "~/Pictures/Wallpapers/desktop"
     },
     "services": {
         "audioIncrement": 0.05,
@@ -730,7 +730,7 @@
             "chargingChanged": true,
             "configLoaded": true,
             "dndChanged": true,
-            "fullscreen": "on",
+            "fullscreen": "off",
             "gameModeChanged": true,
             "kbLayoutChanged": true,
             "kbLimit": true,
