@@ -103,6 +103,23 @@ sudo pacman -S 7zip unrar unzip python go rust deno
 
 Neovim will lazy load everything when it is opened for the first time. It may take some time on the first launch.
 
+# Yazi
+
+Install the `catppuccin-mocha` flavor by:
+
+```zsh
+ya pkg add yazi-rs/flavors:catppuccin-mocha
+```
+
+Create `~/.config/yazi/theme.toml` and add the following content:
+
+```toml
+[flavor]
+dark = "catppuccin-mocha"
+```
+
+For additional information, see `catppuccin-mocha` flavor [documentation](https://github.com/yazi-rs/flavors/tree/main/catppuccin-mocha.yazi)
+
 # Mpv Setup
 
 The only extra thing that `mpv` needs is a font. It can be installed via AUR helper as follows:

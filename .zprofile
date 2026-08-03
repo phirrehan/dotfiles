@@ -2,6 +2,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_MUSIC_DIR="$HOME/Music"
 export XDG_CACHE_HOME="$HOME/.cache"
 export EDITOR="nvim"
+export ZSH_THEME_DIR="$HOME/.local/state/zsh"
 
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/go/bin"

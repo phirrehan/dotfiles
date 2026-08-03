@@ -1,18 +1,21 @@
 #!/bin/bash
 
-# Run fzfmenu.sh to get the selected directory
-selected_dir=$(fd --type directory --hidden . ~ | fuzzel --dmenu)
-[ -z "$selected_dir" ] && exit 1
+# check dependencies
+if command -v fuzzel &>/dev/null; then
+  echo "error: fuzzel is not available"
+  exit 1
+fi
 
-# Get the action to perform
+# variables
+selected_dir=$(fd --type directory --hidden . ~ | fuzzel --dmenu)
+[ -z "$selected_dir" ] && exit 2
 index=$(
   printf "1 Terminal Tmux\0icon\x1ffoot\n2 Dolphin\0icon\x1forg.kde.dolphin\n3 Yazi\0icon\x1fyazi\n4 Nvim\0icon\x1fnvim" |
     fuzzel --dmenu |
     awk '{ print $1 }'
 )
-[ -z "$index" ] && exit 2
+[ -z "$index" ] && exit 3
 
-# Perform the action
 case $index in
 1) foot --working-directory "$selected_dir" -e sh -c "tmux -u new-session" ;;
 2) dolphin "$selected_dir" ;;

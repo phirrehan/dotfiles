@@ -1,3 +1,0 @@
-#!/bin/sh
-
-foot -c ~/.config/foot/footfzf.ini -e sh -c "fzf --pointer '=>' --layout reverse --info hidden --header '$1' --no-multi < /proc/$$/fd/0 > /proc/$$/fd/1"
