@@ -1,19 +1,6 @@
 local fn = require("utils.functions")
+local hf = require("hypr.functions")
 local vars = require("variables")
-
--- helper functions
-local function change_keymap(keymap, message)
-	return function()
-		hl.dispatch(hl.dsp.submap(keymap))
-		hl.dispatch(hl.dsp.exec_cmd("caelestia shell toaster info KeyBinds " .. message .. " Keyboard"))
-	end
-end
-local function exec_and_return(cmd)
-	return function()
-		hl.dispatch(hl.dsp.exec_cmd(cmd))
-		change_keymap("custom", "'Custom Keybinds'")()
-	end
-end
 
 -- variables
 local home = os.getenv("HOME")
@@ -22,7 +9,7 @@ local scriptDir = home .. "/.local/bin"
 local footConf = home .. "/.config/foot/fzf.ini"
 
 -- changing from caelestia to custom keymap
-hl.bind("CTRL + ALT + semicolon", change_keymap("custom", "'Custom Keybinds'"))
+hl.bind("CTRL + ALT + semicolon", hf.change_keymap("custom", "'Custom Keybinds'"))
 
 -- defining custom submap
 hl.define_submap("custom", function()
@@ -130,21 +117,21 @@ hl.define_submap("custom", function()
 	hl.bind("SUPER + c", hl.dsp.workspace.toggle_special("communication"))
 	hl.bind("SUPER + t", hl.dsp.workspace.toggle_special("todo"))
 	hl.bind("SUPER + n", hl.dsp.workspace.toggle_special("notes"))
-	hl.bind("SUPER + SHIFT + s", hl.dsp.window.move({ workspace = "special", follow = false }))
-	hl.bind("SUPER + SHIFT + m", hl.dsp.window.move({ workspace = "music", follow = false }))
-	hl.bind("SUPER + SHIFT + c", hl.dsp.window.move({ workspace = "communication", follow = false }))
-	hl.bind("SUPER + SHIFT + t", hl.dsp.window.move({ workspace = "todo", follow = false }))
-	hl.bind("SUPER + SHIFT + n", hl.dsp.window.move({ workspace = "notes", follow = false }))
+	hl.bind("SUPER + SHIFT + s", hf.minimize_to_special("special"))
+	hl.bind("SUPER + SHIFT + m", hf.minimize_to_special("music"))
+	hl.bind("SUPER + SHIFT + c", hf.minimize_to_special("communication"))
+	hl.bind("SUPER + SHIFT + t", hf.minimize_to_special("todo"))
+	hl.bind("SUPER + SHIFT + n", hf.minimize_to_special("notes"))
 
 	-- pacman submap
-	hl.bind("CTRL + ALT + P", change_keymap("pacman", "'Pacman Keybinds'"))
+	hl.bind("CTRL + ALT + P", hf.change_keymap("pacman", "'Pacman Keybinds'"))
 	hl.define_submap("pacman", function()
-		hl.bind("i", exec_and_return(scriptDir .. "/pacman-helper install"))
-		hl.bind("r", exec_and_return(scriptDir .. "/pacman-helper remove"))
-		hl.bind("u", exec_and_return(scriptDir .. "/pacman-helper update"))
-		hl.bind("a", exec_and_return(scriptDir .. "/pacman-helper aur"))
-		hl.bind("SHIFT + u", exec_and_return(scriptDir .. "/pacman-helper aur-update"))
-		hl.bind("escape", change_keymap("custom", "'Custom Keybinds'"))
+		hl.bind("i", hf.exec_and_return(scriptDir .. "/pacman-helper install"))
+		hl.bind("r", hf.exec_and_return(scriptDir .. "/pacman-helper remove"))
+		hl.bind("u", hf.exec_and_return(scriptDir .. "/pacman-helper update"))
+		hl.bind("a", hf.exec_and_return(scriptDir .. "/pacman-helper aur"))
+		hl.bind("SHIFT + u", hf.exec_and_return(scriptDir .. "/pacman-helper aur-update"))
+		hl.bind("escape", hf.change_keymap("custom", "'Custom Keybinds'"))
 	end)
 
 	-- apps
@@ -214,5 +201,5 @@ hl.define_submap("custom", function()
 	)
 
 	-- changing from custom to caelestia keymap
-	hl.bind("CTRL + ALT + semicolon", change_keymap("reset", "'Caelestia Keybinds'"))
+	hl.bind("CTRL + ALT + semicolon", hf.change_keymap("reset", "'Caelestia Keybinds'"))
 end)
