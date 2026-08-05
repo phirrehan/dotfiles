@@ -3,7 +3,7 @@
 # this is a wrapper script for playerctl that only
 # controls a specific media player stored in $default_player.
 
-# variables 
+# variables
 media_file="$HOME/.local/state/default_player.txt"
 [ -f "$media_file" ] || : >"$media_file"
 top_player=$(playerctl -l 2>/dev/null | head -n1)
@@ -23,7 +23,7 @@ Arguments:
   loop:          toggle loop state.
   -h | --help | help
                 print this message
-  EOF
+EOF
 }
 toggleplay() {
   playerctl --player "$chosen_player" play-pause
@@ -44,14 +44,14 @@ prev() {
 toggleloop() {
   [ -z "$chosen_player" ] && echo "no media playing" && exit 2
   if playerctl --player "$chosen_player" loop | grep -qi none; then
-      playerctl --player "$chosen_player" loop track
+    playerctl --player "$chosen_player" loop track
   else
-      playerctl --player "$chosen_player" loop none
+    playerctl --player "$chosen_player" loop none
   fi
 }
 choose() {
   chosen="$(playerctl -l | fuzzel --dmenu "Choose a media player")"
-  echo "$chosen"  >"$media_file" 2>/dev/null
+  echo "$chosen" >"$media_file" 2>/dev/null
 }
 
 # start
