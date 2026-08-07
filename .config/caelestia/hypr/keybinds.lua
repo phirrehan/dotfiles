@@ -25,7 +25,7 @@ hl.define_submap("custom", function()
 	hl.bind("CTRL + ALT + delete", hl.dsp.global("caelestia:session"))
 	hl.bind("SUPER + slash", hl.dsp.global("caelestia:lock"))
 	hl.bind("SUPER + SHIFT + slash", hl.dsp.exec_cmd(vars.sleepGestureCmd), { locked = true })
-	hl.bind("CTRL + ALT + t", hl.dsp.exec_cmd(scriptDir .. "/zsh_color toggle"))
+	hl.bind("CTRL + ALT + t", hl.dsp.exec_cmd(scriptDir .. "/zsh_color.sh toggle"))
 
 	-- brightness & temperature
 	hl.bind("XF86MonBrightnessUp", hl.dsp.global("caelestia:brightnessUp"), { locked = true })
@@ -50,7 +50,7 @@ hl.define_submap("custom", function()
 	hl.bind("XF86AudioPrev", hl.dsp.global("caelestia:mediaPrev"), { locked = true })
 	hl.bind("XF86AudioStop", hl.dsp.global("caelestia:mediaStop"), { locked = true })
 
-	local media = scriptDir .. "/media "
+	local media = scriptDir .. "/media.sh "
 	hl.bind("SUPER + ALT + bracketright", hl.dsp.exec_cmd(media .. "play-pause"), { locked = true })
 	hl.bind("SUPER + ALT + backslash", hl.dsp.exec_cmd(media .. "next"), { locked = true })
 	hl.bind("SUPER + ALT + semicolon", hl.dsp.exec_cmd(media .. "previous"), { locked = true })
@@ -114,10 +114,10 @@ hl.define_submap("custom", function()
 	-- pacman submap
 	hl.bind("CTRL + ALT + P", hf.change_keymap("pacman", "'Pacman Keybinds'"))
 	hl.define_submap("pacman", function()
-		hl.bind("i", hf.exec_and_return(scriptDir .. "/pacman-helper install"))
-		hl.bind("r", hf.exec_and_return(scriptDir .. "/pacman-helper remove"))
-		hl.bind("u", hf.exec_and_return(scriptDir .. "/pacman-helper update"))
-		hl.bind("a", hf.exec_and_return(scriptDir .. "/pacman-helper aur"))
+		hl.bind("i", hf.exec_and_return(scriptDir .. "/pacman-helper.sh install"))
+		hl.bind("r", hf.exec_and_return(scriptDir .. "/pacman-helper.sh remove"))
+		hl.bind("u", hf.exec_and_return(scriptDir .. "/pacman-helper.sh update"))
+		hl.bind("a", hf.exec_and_return(scriptDir .. "/pacman-helper.sh aur"))
 		hl.bind("SHIFT + u", hf.exec_and_return(scriptDir .. "/pacman-helper aur-update"))
 		hl.bind("escape", hf.change_keymap("custom", "'Custom Keybinds'"))
 	end)
@@ -180,12 +180,11 @@ hl.define_submap("custom", function()
 	hl.bind("SUPER + period", hl.dsp.exec_cmd("pkill fuzzel || caelestia emoji -p"))
 
 	-- scripts
-	hl.bind("SUPER + CTRL + bracketright", hl.dsp.exec_cmd(scriptDir .. "/toggle-touchpad"), { locked = true })
-	hl.bind("SUPER + r", hl.dsp.exec_cmd(scriptDir .. "/folderfind"))
-	hl.bind("SUPER + ALT + p", hl.dsp.exec_cmd(scriptDir .. "/passget"))
+	hl.bind("SUPER + r", hl.dsp.exec_cmd(scriptDir .. "/folderfind.sh"))
+	hl.bind("SUPER + ALT + p", hl.dsp.exec_cmd(scriptDir .. "/passget.sh"))
 	hl.bind(
 		"SUPER + CTRL + p",
-		hl.dsp.exec_cmd("foot -a foot-fzf -c " .. footConf .. " -e sh -c " .. scriptDir .. "/passgen")
+		hl.dsp.exec_cmd("foot -a foot-fzf -c " .. footConf .. " -e sh -c " .. scriptDir .. "/passgen.sh")
 	)
 
 	-- changing from custom to caelestia keymap
