@@ -1,4 +1,3 @@
-local fn = require("utils.functions")
 local hf = require("hypr.functions")
 local vars = require("variables")
 
@@ -90,18 +89,7 @@ hl.define_submap("custom", function()
 	hl.bind("SUPER + SHIFT + d", hl.dsp.layout("togglesplit"))
 	hl.bind("SUPER + mouse:272", hl.dsp.window.drag())
 	hl.bind("SUPER + mouse:273", hl.dsp.window.resize())
-	hl.bind("SUPER + u", function()
-		local a = hl.get_active_window()
-		if a then
-			local pip = fn.move_actions(a) or {}
-			table.insert(pip, 1, hl.dsp.window.float())
-			table.insert(pip, hl.dsp.window.pin({ window = "address:" .. a.address }))
-
-			for _, x in ipairs(pip) do
-				hl.dispatch(x)
-			end
-		end
-	end)
+	hl.bind("SUPER + u", hf.pip())
 	hl.bind("SUPER + p", hl.dsp.window.pin())
 	hl.bind("SUPER + q", hl.dsp.window.close())
 	hl.bind("SUPER + SHIFT + q", hl.dsp.window.kill())

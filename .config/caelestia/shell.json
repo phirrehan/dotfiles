@@ -617,7 +617,7 @@
         "defaultExpireTimeout": 5000,
         "expandThreshold": 20,
         "expire": true,
-        "fullscreen": "off",
+        "fullscreen": "on",
         "fullscreenExpireTimeout": 2000,
         "groupPreviewNum": 3,
         "openExpanded": false
@@ -730,7 +730,7 @@
             "chargingChanged": true,
             "configLoaded": true,
             "dndChanged": true,
-            "fullscreen": "off",
+            "fullscreen": "on",
             "gameModeChanged": true,
             "kbLayoutChanged": true,
             "kbLimit": true,
