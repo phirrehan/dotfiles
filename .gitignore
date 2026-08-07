@@ -1,2 +1,3 @@
 .zcompdump
 .local/bin/subliminal
+.config/tmux/plugins
