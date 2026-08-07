@@ -1,0 +1,212 @@
+#!/usr/bin/env bash
+#
+# setup_system - bootstrap this dotfiles repo on a fresh Arch machine.
+#
+# Installs dependencies, stows the configs into $HOME, and sets up zsh, tmux
+# (tpm + plugins) and neovim (lazy + mason + treesitter) in headless mode.
+#
+# Design notes:
+#   - NOT idempotency-fragile: a failing step never aborts the run. Each step is
+#     wrapped so a non-zero exit only logs a WARN and the script continues.
+#   - Strictly sequential. No background jobs, no parallelism.
+#   - Re-running is safe: pacman uses --needed, clones are skipped if present.
+#
+# Run from the repo root:  ./scripts/setup_system
+
+# Resolve the repo root (parent of this script's dir) so we can stow from there.
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+REPO_DIR="$(dirname -- "$SCRIPT_DIR")"
+INSTALL_CAELESTIA=true
+
+have() { command -v "$1" >/dev/null 2>&1; }
+
+# step "Human label" cmd args...   -> run it, warn (don't abort) on failure.
+step() {
+  local label="$1"
+  shift
+  printf '\n==> %s\n' "$label"
+  if "$@"; then
+    printf '    ok: %s\n' "$label"
+  else
+    printf '    WARN: %s failed (exit %d), continuing\n' "$label" "$?" >&2
+  fi
+}
+
+###############
+#### Steps ####
+###############
+
+install_packages() {
+  sudo pacman -S --needed --noconfirm \
+    git stow zsh curl \
+    neovim mpv foot fastfetch tmux yazi qbittorrent \
+    fzf fd aria2 ffmpeg pdftk pdfgrep ttf-jetbrains-mono-nerd \
+    7zip unrar unzip python go rust deno \
+    fuzzel hyprpicker hyprsunset
+}
+
+stow_dotfiles() {
+  # --restow re-creates symlinks cleanly on re-runs. Targets $HOME.
+  stow --restow --target="$HOME" --dir="$REPO_DIR" .
+}
+
+setup_zinit() {
+  local zinit_dir="$HOME/.local/share/zinit/zinit.git"
+  if [ -d "$zinit_dir" ]; then
+    echo "    zinit already present, skipping"
+    return 0
+  fi
+  git clone https://github.com/zdharma-continuum/zinit.git "$zinit_dir"
+}
+
+setup_default_shell() {
+  local zsh_path
+  zsh_path="$(command -v zsh)" || {
+    echo "    zsh not installed, skipping"
+    return 1
+  }
+  if [ "$SHELL" = "$zsh_path" ]; then
+    echo "    default shell already zsh, skipping"
+    return 0
+  fi
+  chsh -s "$zsh_path"
+}
+
+setup_tpm() {
+  local tpm_dir="$HOME/.config/tmux/plugins/tpm"
+  if [ ! -d "$tpm_dir" ]; then
+    git clone https://github.com/tmux-plugins/tpm "$tpm_dir" || return 1
+  else
+    echo "    tpm already present, skipping clone"
+  fi
+  # Reads the @plugin lines from the stowed tmux.conf and fetches the rest.
+  "$tpm_dir/bin/install_plugins"
+}
+
+# --- neovim headless provisioning (each its own step) ---
+
+nvim_lazy_sync() {
+  nvim --headless "+Lazy! sync" +qa
+}
+
+nvim_mason_install() {
+  # Mason installs asynchronously; wait for its completion event before quitting,
+  # otherwise headless nvim exits before tools finish downloading.
+  nvim --headless \
+    -c "autocmd User MasonToolsUpdateCompleted quitall" \
+    -c "MasonToolsInstall"
+}
+
+nvim_treesitter_install() {
+  # Sync variant blocks until all parsers are compiled (headless-safe).
+  nvim --headless "+TSInstallSync all" +qa
+}
+
+setup_paru() {
+  if command -v paru >/dev/null 2>&1; then
+    echo "    paru already installed, skipping"
+    return 0
+  fi
+
+  local build_dir
+  build_dir="$(mktemp -d)"
+
+  git clone https://aur.archlinux.org/paru.git "$build_dir/paru" || return 1
+
+  (
+    cd "$build_dir/paru" &&
+      makepkg -si --noconfirm
+  ) || return 1
+
+  rm -rf "$build_dir"
+}
+setup_caelestia() {
+  if ! command -v caelestia >/dev/null 2>&1; then
+    paru -S --noconfirm caelestia-cli || return 1
+  else
+    echo "    caelestia-cli already installed"
+  fi
+
+  caelestia install
+}
+setup_fuzzel() {
+  mkdir -p "$HOME/.config/fuzzel"
+
+  curl -fsSL \
+    https://raw.githubusercontent.com/caelestia-dots/fuzzel/main/fuzzel.ini \
+    -o "$HOME/.config/fuzzel/fuzzel.ini"
+}
+setup_yazi_theme() {
+  ya pkg add yazi-rs/flavors:catppuccin-mocha || return 1
+
+  mkdir -p "$HOME/.config/yazi"
+
+  cat >"$HOME/.config/yazi/theme.toml" <<'EOF'
+[flavor]
+dark = "catppuccin-mocha"
+EOF
+}
+help() {
+  cat <<EOF
+Usage: $(basename "$0") [OPTIONS]
+
+Options:
+  --no-caelestia    Skip installing caelestia-cli and running 'caelestia install'
+  -h, --help        Show this help message
+EOF
+}
+
+################################
+###### Arguemnts Handling ######
+################################
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+  --no-caelestia)
+    INSTALL_CAELESTIA=false
+    ;;
+  -h | --help)
+    cat <<EOF
+Usage: $(basename "$0") [OPTIONS]
+
+Options:
+  --no-caelestia    Skip installing caelestia-cli and running 'caelestia install'
+  -h, --help        Show this help message
+EOF
+    exit 0
+    ;;
+  *)
+    echo "Unknown option: $1"
+    echo "Try '$(basename "$0") --help'"
+    exit 1
+    ;;
+  esac
+  shift
+done
+
+#################
+###### Run ######
+#################
+
+echo "dotfiles setup_system - repo: $REPO_DIR"
+
+step "Install packages (pacman)" install_packages
+step "Install paru (AUR helper)" setup_paru
+step "Install caelestia" setup_caelestia
+step "Stow dotfiles into \$HOME" stow_dotfiles
+step "Configure fuzzel" setup_fuzzel
+step "Install zinit" setup_zinit
+step "Set zsh as default shell" setup_default_shell
+step "Install tpm + tmux plugins" setup_tpm
+step "neovim: sync lazy plugins" nvim_lazy_sync
+step "neovim: MasonToolsInstall" nvim_mason_install
+step "neovim: TSInstallSync all" nvim_treesitter_install
+step "Install Yazi catppuccin theme" setup_yazi_theme
+
+cat <<'EOF'
+
+Setup complete. Next:
+  - Start a fresh shell:   exec zsh
+  - Launch tmux:           tmux
+  (If any step logged a WARN above, re-run ./scripts/setup_system after fixing it.)
+EOF
