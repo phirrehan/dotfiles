@@ -2,7 +2,7 @@
 alias ls="eza --icons --group-directories-first"
 alias Ls="eza -A --icons --group-directories-first"
 alias grep="grep --color=auto"
-alias tmux="$HOME/.local/bin/zsh_color reset; tmux"
+alias tmux="$HOME/.local/bin/zsh_color.sh reset; tmux"
 
 # Zsh Config
 alias svim="sudo -E nvim"
