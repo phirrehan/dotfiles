@@ -22,7 +22,8 @@ setopt hist_ignore_dups
 setopt hist_find_no_dups
 
 # Load completions
-autoload -Uz compinit && compinit
+autoload -Uz compinit
+compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 
 zinit cdreplay -q
 
