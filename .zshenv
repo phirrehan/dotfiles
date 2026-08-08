@@ -43,7 +43,3 @@ export GIT_CONFIG_GLOBAL="$XDG_CONFIG_HOME/git/config"
 
 # wine prefix
 export WINEPREFIX="$XDG_DATA_HOME/wine"
-
-# Append PATH 
-export PATH="$PATH:$HOME/.local/bin"
-export PATH="$PATH:$GOPATH/bin"
