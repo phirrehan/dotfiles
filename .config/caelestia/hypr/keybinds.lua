@@ -118,7 +118,7 @@ hl.define_submap("custom", function()
 		hl.bind("r", hf.exec_and_return(scriptDir .. "/pacman-helper.sh remove"))
 		hl.bind("u", hf.exec_and_return(scriptDir .. "/pacman-helper.sh update"))
 		hl.bind("a", hf.exec_and_return(scriptDir .. "/pacman-helper.sh aur"))
-		hl.bind("SHIFT + u", hf.exec_and_return(scriptDir .. "/pacman-helper aur-update"))
+		hl.bind("SHIFT + u", hf.exec_and_return(scriptDir .. "/pacman-helper.sh aur-update"))
 		hl.bind("escape", hf.change_keymap("custom", "'Custom Keybinds'"))
 	end)
 

@@ -207,9 +207,9 @@
         },
         "enabled": true,
         "visualiser": {
-            "autoHide": true,
+            "autoHide": false,
             "blur": false,
-            "enabled": false,
+            "enabled": true,
             "rounding": 1,
             "spacing": 1
         },
@@ -568,7 +568,7 @@
             },
             {
                 "command": [
-                    "/home/rehan/.local/bin/toggle-caelestia",
+                    "/home/rehan/.local/bin/toggle-caelestia.sh",
                     "visualiser"
                 ],
                 "dangerous": false,
@@ -653,7 +653,7 @@
         "useFahrenheit": false,
         "useFahrenheitPerformance": false,
         "useTwelveHourClock": false,
-        "visualiserBars": 60,
+        "visualiserBars": 50,
         "weatherLocation": ""
     },
     "session": {
