@@ -4,8 +4,10 @@ require("mason-tool-installer").setup {
   -- start
   ensure_installed = {
     "black",
+    "clangd",
     "clang-format",
     "css-lsp",
+    "jdtls",
     "docker-language-server",
     "gofumpt",
     "gopls",
