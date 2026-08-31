@@ -1,4 +1,6 @@
+local home = os.getenv("HOME")
 hl.on("hyprland.start", function()
 	hl.exec_cmd("hyprsunset")
 	hl.exec_cmd("hyprctl dispatch 'hl.dsp.submap(\"custom\")'")
+	hl.exec_cmd("printf '%s\n' on >" .. home .. "/.local/state/touchpad")
 end)
