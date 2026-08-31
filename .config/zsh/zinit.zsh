@@ -24,6 +24,14 @@ setopt hist_find_no_dups
 # Load completions
 autoload -Uz compinit
 compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
+_anime() {
+    local -a suggestions
+
+    suggestions=("${(@f)$(< ~/.local/state/anime/list.txt)}")
+
+    compadd -M 'm:{a-z}={A-Z}' -- "${suggestions[@]}"
+}
+compdef _anime ani-cli
 
 zinit cdreplay -q
 

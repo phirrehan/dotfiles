@@ -5,9 +5,12 @@ alias grep="grep --color=auto"
 alias tmux="$HOME/.local/bin/zsh_color.sh reset; tmux"
 
 # Zsh Config
+alias sz="source ~/.config/zsh/.zshrc"
+alias ngit="nvim -c Neogit"
 alias svim="sudo -E nvim"
-alias sz="source ~/.zshrc"
 
+# Anid
+alias anid="ani-cli -d -q 1080"
 
 # Global Aliases
 alias -g C="| wl-copy"
