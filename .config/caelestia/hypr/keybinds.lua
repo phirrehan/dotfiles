@@ -24,7 +24,12 @@ hl.define_submap("custom", function()
 	hl.bind("SUPER + ALT + c", hl.dsp.global("caelestia:clearNotifs"), { locked = true })
 	hl.bind("CTRL + ALT + delete", hl.dsp.global("caelestia:session"))
 	hl.bind("SUPER + slash", hl.dsp.global("caelestia:lock"))
-	hl.bind("SUPER + SHIFT + slash", hl.dsp.exec_cmd(vars.sleepGestureCmd), { locked = true })
+	hl.bind(
+		"SUPER + SHIFT + slash",
+		hl.dsp.exec_cmd("hyprctl dispatch 'hl.dsp.global(\"caelestia:lock\")'; sleep 1; " .. vars.sleepGestureCmd),
+		{ locked = true }
+	)
+	hl.bind("SUPER + ALT + o", hl.dsp.exec_cmd(scriptDir .. "/touchpad.sh toggle"))
 	hl.bind("CTRL + ALT + t", hl.dsp.exec_cmd(scriptDir .. "/zsh_color.sh toggle"))
 
 	-- brightness & temperature
