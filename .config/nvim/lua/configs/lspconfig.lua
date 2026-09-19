@@ -16,6 +16,7 @@ local servers = {
   "sqls",
   "pylsp",
   "tailwind-css-server",
+  "kotlin_lsp",
 }
 
 vim.lsp.config("gopls", {

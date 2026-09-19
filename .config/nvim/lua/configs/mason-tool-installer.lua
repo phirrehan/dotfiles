@@ -28,6 +28,7 @@ require("mason-tool-installer").setup {
     "tailwindcss-language-server",
     "templ",
     "typescript-language-server",
+    "kotlin-lsp",
   },
 
   -- if set to true this will check each tool for updates. If updates
