@@ -6,5 +6,5 @@ source "$HOME/.config/zsh/misc.zsh"
 source "$HOME/.config/zsh/zinit.zsh"
 
 # ======= Greeting =======
-$HOME/.local/bin/greeting.sh
+[ -z "$TMUX" ] && [ -z "$NVIM" ] && $HOME/.local/bin/greeting.sh
 $HOME/.local/bin/zsh_color.sh default
