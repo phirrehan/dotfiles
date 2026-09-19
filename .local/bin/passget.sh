@@ -11,5 +11,5 @@ password_name=$(ls $PASSWORD_STORE_DIR | sed 's/\.gpg$//' | fuzzel --dmenu)
 # Exit if no password is selected
 [ -z "$password_name" ] && exit 1
 
-# Copy password
-pass -c "$password_name"
+# get password
+pass "$password_name"

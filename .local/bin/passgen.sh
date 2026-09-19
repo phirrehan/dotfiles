@@ -11,5 +11,4 @@ if [[ ! "$passLength" =~ ^[0-9]+$ ]]; then
 fi
 
 # generate password
-pass generate -c "$passName" "$passLength"
-read -p "Press enter to exit"
+pass generate "$passName" "$passLength" | sed -n 2p
