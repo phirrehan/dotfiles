@@ -11,4 +11,5 @@ if [[ ! "$passLength" =~ ^[0-9]+$ ]]; then
 fi
 
 # generate password
-pass generate "$passName" "$passLength" | sed -n 2p
+pass generate "$passName" "$passLength" >/dev/null
+printf '%s' "$passName" >"$XDG_RUNTIME_DIR/pass-selected"

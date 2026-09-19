@@ -6,10 +6,10 @@
 [ -f "$PASSWORD_STORE_DIR/$1.gpg" ] && pass -c "$1" && exit 0
 
 # Otherwise get password name using fzf
-password_name=$(ls $PASSWORD_STORE_DIR | sed 's/\.gpg$//' | fuzzel --dmenu)
+passName=$(ls $PASSWORD_STORE_DIR | sed 's/\.gpg$//' | fuzzel --dmenu)
 
 # Exit if no password is selected
-[ -z "$password_name" ] && exit 1
+[ -z "$passName" ] && exit 1
 
-# get password
-pass "$password_name"
+# store password name in a temporary file
+printf '%s' "$passName" >"$XDG_RUNTIME_DIR/pass-selected"
