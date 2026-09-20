@@ -3,7 +3,8 @@
 --=============================================================================
 --          This script uses Subliminal to download subtitles,
 --          so make sure to specify your system's Subliminal location below:
-local subliminal = "/home/docar/.local/share/pipx/venvs/subliminal"
+local home = os.getenv("HOME")
+local subliminal = home .. "/.local/share/pipx/venvs/subliminal"
 --=============================================================================
 -->>    SUBTITLE LANGUAGE:
 --=============================================================================
