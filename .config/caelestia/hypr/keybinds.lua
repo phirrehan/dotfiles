@@ -187,10 +187,7 @@ hl.define_submap("custom", function()
 	-- scripts
 	hl.bind("SUPER + r", hl.dsp.exec_cmd(scriptDir .. "/folderfind.sh"))
 	hl.bind("SUPER + ALT + p", hl.dsp.exec_cmd(scriptDir .. "/passget.sh"))
-	hl.bind(
-		"SUPER + CTRL + p",
-		hl.dsp.exec_cmd("foot -a foot-fzf -c " .. footConf .. " -e sh -c " .. scriptDir .. "/passgen.sh")
-	)
+	hl.bind("SUPER + CTRL + p", hl.dsp.exec_cmd(scriptDir .. "/passgen.sh"))
 
 	-- changing from custom to caelestia keymap
 	hl.bind("CTRL + ALT + semicolon", hf.change_keymap("reset", "'Caelestia Keybinds'"))
