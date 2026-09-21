@@ -6,7 +6,7 @@
   sed 's/\.gpg$//' | fuzzel --dmenu)
 
 printf '%s' "$pass_name" |
-  grep -q '.+otp$' &&
+  grep -Eq '.+otp$' &&
   pass_name="otp/$pass_name" &&
   pass_args=("otp" "$pass_name") || pass_args=("$pass_name")
 
