@@ -31,7 +31,11 @@ tmpLength="$XDG_RUNTIME_DIR/pass-length"
 passName=$(cat "$tmpName")
 passLength=$(cat "$tmpLength")
 passDir="$(
-  find "$PASSWORD_STORE_DIR" -mindepth 1 -maxdepth 1 -type d -printf '%f\n' |
+  find "$PASSWORD_STORE_DIR" \
+    -mindepth 1 -maxdepth 1 \
+    -type d \
+    ! -name '.*' \
+    -printf '%f\n' |
     fuzzel --dmenu
 )"
 [ -z "$passDir" ] && rmTmp && exit 4
