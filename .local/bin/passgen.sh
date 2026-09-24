@@ -1,5 +1,11 @@
 #!/bin/bash
 
+rmTmp() {
+  tmpName="$XDG_RUNTIME_DIR/pass-name"
+  tmpLength="$XDG_RUNTIME_DIR/pass-length"
+  rm "$tmpName" "$tmpLength"
+}
+
 footConfigDir="$HOME/.config/foot"
 
 # input
@@ -24,16 +30,17 @@ tmpName="$XDG_RUNTIME_DIR/pass-name"
 tmpLength="$XDG_RUNTIME_DIR/pass-length"
 passName=$(cat "$tmpName")
 passLength=$(cat "$tmpLength")
-passDir="$(ls "$PASSWORD_STORE_DIR" | fuzzel --dmenu)"
+passDir="$(
+  find "$PASSWORD_STORE_DIR" -mindepth 1 -maxdepth 1 -type d -printf '%f\n' |
+    fuzzel --dmenu
+)"
+[ -z "$passDir" ] && rmTmp && exit 4
 
 # generate password and type it after removing
 # ansi esc sequences and newline characters from text
-pass generate -f "$passName" "$passLength" |
-  awk 'NR==2 { gsub(/\x1B\[[0-9;]*[[:alpha:]]/, ""); printf "%s", $0 }' |
+pass generate -f "$passDir/$passName" "$passLength" |
+  awk 'END { gsub(/\x1B\[[0-9;]*[[:alpha:]]/, ""); printf "%s", $0 }' |
   wtype -
 
-# move the password to it's appropriate directory
-pass mv "$passName" "$passDir/"
-
 # delete temporary files
-rm "$tmpName" "$tmpLength"
+rmTmp

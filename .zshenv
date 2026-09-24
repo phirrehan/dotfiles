@@ -10,7 +10,7 @@ export EDITOR="nvim"
 
 # Used for scripts
 export ZSH_THEME_DIR="$HOME/.local/state/zsh"
-export PASSWORD_STORE_DIR="$HOME/files/Passwords/store"
+export PASSWORD_STORE_DIR="$HOME/files/pass-store"
 
 # Rust / Cargo
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
